@@ -11,9 +11,11 @@ export async function getAllBookings(bookingType?: string): Promise<Booking[]> {
   return bookingRepo().find({ relations: ['bulletPoints'] });
 }
 
+
 export async function createBooking(data: any) {
-  const booking: Booking = bookingRepo().create(data);
+  const booking: Booking[] = bookingRepo().create(data);
   if (data.bulletPoints) {
+    // @ts-ignore
     booking.bulletPoints = data.bulletPoints.map((bp: any) => bulletRepo().create({ name: bp.name }));
   }
   return bookingRepo().save(booking);
