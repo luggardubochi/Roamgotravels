@@ -1,5 +1,7 @@
 import { DataSource } from 'typeorm';
 import { User } from '../models/user';
+import { UserBooking } from '../models/userBooking';
+import { Booking, BookingBulletPoint } from '../models/booking';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -12,7 +14,7 @@ if (dbType === 'sqlite') {
   dataSourceOptions = {
     type: 'sqlite',
     database: process.env.SQLITE_DB_PATH || 'database.sqlite',
-    entities: [User],
+    entities: [User, UserBooking, Booking, BookingBulletPoint],
     synchronize: true, // Set to false in production
   };
 } else {
@@ -23,7 +25,7 @@ if (dbType === 'sqlite') {
     username: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'test',
-    entities: [User],
+    entities: [User, UserBooking, Booking, BookingBulletPoint],
     synchronize: true, // Set to false in production
   };
 }

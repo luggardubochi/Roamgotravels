@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import authController from '../controllers/authController';
 import { authenticateJWT, AuthRequest, requireRole } from '../middlewares/authMiddleware';
 import { AppDataSource } from '../config/database';
@@ -10,9 +10,18 @@ import * as userController from '../controllers/userController';
 import { sensitiveLimiter } from '../middlewares/rateLimit';
 import * as bookingController from '../controllers/bookingController';
 import * as userBooking from '../controllers/userBookingController';
-import { Request, Response } from 'express';
 
 const router = Router();
+
+const booking_router = Router();
+// @ts-ignore
+booking_router.get('/bookings', bookingController.getBooking);
+booking_router.post('/bookings', authenticateJWT, requireRole("admin"), bookingController.addBooking);
+booking_router.patch('/bookings/:id', authenticateJWT, requireRole("admin"), bookingController.editBooking);
+// @ts-ignore
+booking_router.delete('/bookings/:id', authenticateJWT, requireRole("admin"), bookingController.removeBooking);
+
+router.use("", booking_router);
 
 router.get('/', (req, res) => {
   res.json({ message: 'Welcome to the backend API!' });
@@ -35,13 +44,6 @@ router.delete('/users/:id', authenticateJWT, requireRole('admin'), userControlle
 router.patch('/users/:id', authenticateJWT, validate(updateProfileSchema), userController.updateUserProfile);
 router.patch('/users/:id/password', authenticateJWT, validate(changePasswordSchema), userController.changePassword);
 
-// @ts-ignore
-router.get('/booking', bookingController.getBooking);
-router.post('/bookings', authenticateJWT, requireRole("admin"), bookingController.addBooking);
-router.patch('/bookings/:id', authenticateJWT, requireRole("admin"), bookingController.editBooking);
-// @ts-ignore
-router.delete('/bookings/:id', authenticateJWT, requireRole("admin"), bookingController.removeBooking);
-
 
 // @ts-ignore
 router.post('/user-bookings', authenticateJWT, userBooking.createUserBooking);
@@ -53,5 +55,15 @@ router.get('/user-bookings/:id', authenticateJWT, userBooking.getSingleUserBooki
 router.put('/user-bookings/:id', authenticateJWT, userBooking.editUserBooking);
 // @ts-ignore
 router.post('/user-bookings/:id/cancel', authenticateJWT, userBooking.cancelUserBooking);
+
+// Booking bullet point endpoints (admin only)
+// @ts-ignore
+router.patch('/bookings/bullet/edit', authenticateJWT, requireRole('admin'), bookingController.editBulletPoint);
+// @ts-ignore
+router.delete('/bookings/bullet/remove', authenticateJWT, requireRole('admin'), bookingController.removeBulletPoint);
+// @ts-ignore
+router.post('/bookings/bullet/add', authenticateJWT, requireRole('admin'), bookingController.addBulletPoint);
+// @ts-ignore
+router.get('/bookings/bullet/:id', authenticateJWT, requireRole('admin'), bookingController.getSingleBullet);
 
 export default router; 

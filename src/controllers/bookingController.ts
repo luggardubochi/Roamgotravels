@@ -1,6 +1,6 @@
 import { Request, Response, Router, NextFunction } from 'express';
 import { Booking, bookingSchema, BookingBulletPoint } from '../models/booking';
-import { createBooking, deleteBooking, updateBooking, getAllBookings } from '../services/bookingService';
+import { createBooking, deleteBooking, updateBooking, getAllBookings, getSingleBooking, createBulletPoint, editBulletPoint as editBulletPointService, deleteSingleBullet, getSingleBullet as getSingleBulletService } from '../services/bookingService';
 import { User } from '../models/user';
 // @ts-ignore
 import { v2 as cloudinary } from 'cloudinary';
@@ -14,6 +14,10 @@ import path from 'path';
 interface AuthRequest extends Request {
   user?: { role: string;[key: string]: any };
   file?: any;
+}
+
+interface BulletInterface extends Response {
+  bullets: Array<BookingBulletPoint>
 }
 
 const upload = multer({
@@ -98,7 +102,12 @@ export const editBooking = [
         return res.status(500).json({ message: 'Image upload failed' });
       }
     }
-    const bookingData = { ...req.body, image: imageUrl };
+    let booking = (await getSingleBooking(req.body.id)) as Booking;
+    if (booking.id) {
+      // @ts-ignore
+      delete booking.id;
+    }
+    const bookingData = { ...booking, ...req.body };
     const { error, value } = bookingSchema.validate(bookingData);
     if (error) return res.status(400).json({ message: error.details[0].message });
     try {
@@ -113,6 +122,15 @@ export const editBooking = [
   }
 ];
 
+// Edit Booking Bullet Points
+
+export const editBookingBullet = [requireAdmin, async (req: AuthRequest, res: Response) => {
+  if (!(req.body.id && req.body.bulletid)) {
+    return res.status(400).json({ message: "invalid request. Absence of bookingid or bulletid" });
+  }
+  let response = { "name": req }
+}]
+
 // Delete Booking (Admin only)
 export const removeBooking = async (req: AuthRequest, res: Response) => {
   try {
@@ -126,3 +144,62 @@ export const removeBooking = async (req: AuthRequest, res: Response) => {
   }
 };
 
+
+export const addBulletPoint = async (req: AuthRequest, res: Response) => {
+  try {
+    createBulletPoint(req.params.id, new Array(...req.body.bullets))
+  } catch (err) {
+    if ((err as Error).message === 'Booking not found') {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+    return res.status(500).json({ message: 'Failed to delete booking' });
+  }
+}
+
+export const editBulletPoint = async (req: AuthRequest, res: Response) => {
+  const { bulletId, name } = req.body;
+  if (!bulletId || !name) {
+    return res.status(400).json({ message: 'bulletId and name are required' });
+  }
+  try {
+    await editBulletPointService(bulletId, name);
+    return res.json({ message: 'Bullet point updated successfully' });
+  } catch (err) {
+    if ((err as Error).message === 'Bullet not found') {
+      return res.status(404).json({ message: 'Bullet not found' });
+    }
+    return res.status(500).json({ message: 'Failed to update bullet point' });
+  }
+};
+
+export const removeBulletPoint = async (req: AuthRequest, res: Response) => {
+  const { bulletId } = req.body;
+  if (!bulletId) {
+    return res.status(400).json({ message: 'bulletId is required' });
+  }
+  try {
+    await deleteSingleBullet(bulletId);
+    return res.json({ message: 'Bullet point deleted successfully' });
+  } catch (err) {
+    if ((err as Error).message === 'Bullet not found') {
+      return res.status(404).json({ message: 'Bullet not found' });
+    }
+    return res.status(500).json({ message: 'Failed to delete bullet point' });
+  }
+};
+
+export const getSingleBullet = async (req: AuthRequest, res: Response) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ message: 'Bullet point ID is required' });
+  }
+  try {
+    const bullet = await getSingleBulletService(id);
+    return res.json({ bullet });
+  } catch (err) {
+    if ((err as Error).message === 'Bullet not found') {
+      return res.status(404).json({ message: 'Bullet not found' });
+    }
+    return res.status(500).json({ message: 'Failed to fetch bullet point' });
+  }
+};
