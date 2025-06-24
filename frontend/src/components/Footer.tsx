@@ -1,4 +1,5 @@
 import React from 'react';
+import { TbBrandFacebook, TbBrandInstagram, TbBrandX } from "react-icons/tb";
 
 const currentYear = new Date().getFullYear();
 
@@ -21,12 +22,12 @@ const Footer: React.FC = () => (
         <a href="/trip" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Trip</a>
         <a href="/about" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>About Us</a>
         <a href="/contact" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Contact</a>
-        <a href="/career" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Career</a>
+        {/* <a href="/career" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Career</a> */}
       </div>
       <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', margin: '0.5rem 0' }}>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '1.5rem', opacity: 0.8 }} aria-label="Facebook">🌐</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '1.5rem', opacity: 0.8 }} aria-label="Instagram">📸</a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '1.5rem', opacity: 0.8 }} aria-label="Twitter">🐦</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '1.5rem', opacity: 0.8 }} aria-label="Facebook"><TbBrandFacebook /></a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '1.5rem', opacity: 0.8 }} aria-label="Instagram"><TbBrandInstagram /></a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '1.5rem', opacity: 0.8 }} aria-label="Twitter"><TbBrandX /></a>
       </div>
       <div style={{ fontSize: '0.98rem', opacity: 0.7, color: '#fff' }}>
         &copy; {currentYear} Roamgo Travels. All rights reserved.

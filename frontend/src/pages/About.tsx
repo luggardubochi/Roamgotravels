@@ -12,6 +12,25 @@ const About: React.FC = () => {
         </div>
       </section>
 
+      {/* RoamGO Travels is a UK-based, registered travel agency offering both local and international travel services. Our team specializes in creating personalized travel experiences, including booking flights, hotels, activities, and airport transfers.
+
+We also offer: 
+
+group tours, where one of our team members will accompany you as a tour guide to ensure
+
+a seamless and enjoyable experience
+
+
+
+RoamGo is all about encouraging everyone to adventure more by breaking barriers and making travel exciting and accessible with our bucket list experiences!
+
+
+
+To me travel is an essential pillar to living a life filled with purpose and meaning. It enables you to venture beyond your small pocket of the world and find beauty in the unknown. We help travelers each year plan stress-free getaways, from our group travel meet-ups to our private experiences!
+
+
+
+Whether you are a seasoned traveler or you finally mustered up the courage to take that first step, the experiences and travel packages we curate are all about building lasting friendships beyond your existing circle of friends, opening up to new cultures and supporting the local communities in the destinations we visit. */}
       {/* Our Story Section */}
       <section className="story-section">
         <div className="container">
@@ -19,13 +38,11 @@ const About: React.FC = () => {
             <div className="story-text">
               <h2>Our Story</h2>
               <p>
-                Founded in 2018, Roamgo Travels began with a simple mission: to make extraordinary travel experiences accessible to everyone.
-                What started as a small team of passionate travelers has grown into a trusted travel partner for thousands of adventurers worldwide.
+                RoamGo Travels is a UK-based, registered travel agency offering both local and international travel services. Our team specializes in creating personilized travel experiences, including booking flights, hotels, activities and airport transfers.
               </p>
-              <p>
-                Our journey began when our founders, Sarah and Michael, returned from a life-changing backpacking trip through Southeast Asia.
-                They realized that the best travel experiences weren't just about seeing new places, but about connecting with people, cultures,
-                and creating memories that last a lifetime.
+              <p> RoamGO see travel as an essential pillar to living a life filled with purpose and meaning. It enables you to venture beyond your small pocket of the world and find beauty in the unknown. We help travelers each year plan stress-free getaways, from our group travels meetups to our private experiences!.
+              </p><p>
+                Does not matter which category you fall under, either you are a seasoned traveler or a total beginner, the experience and travel package we curate are all about building lasting friendship beyond your existing circle of friends, opening up to new cultures and supporting the local communities in the destinations as we visit.
               </p>
               <p>
                 Today, we've helped over 50,000 travelers explore more than 100 destinations across 6 continents. From solo adventurers to

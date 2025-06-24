@@ -263,10 +263,10 @@ const Contact: React.FC = () => {
               <h3>What is your cancellation policy?</h3>
               <p>We offer flexible cancellation policies. Most bookings can be cancelled up to 30 days before departure with a full refund. Please check specific trip details for exact terms.</p>
             </div>
-            <div className="faq-item">
+            {/* <div className="faq-item">
               <h3>Do you offer travel insurance?</h3>
               <p>Yes, we highly recommend travel insurance for all trips. We can help you arrange comprehensive coverage that includes medical, trip cancellation, and baggage protection.</p>
-            </div>
+            </div> */}
             <div className="faq-item">
               <h3>Can I customize my trip itinerary?</h3>
               <p>Absolutely! We specialize in creating custom itineraries. Our travel experts will work with you to design the perfect trip that matches your interests, budget, and schedule.</p>

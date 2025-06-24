@@ -31,7 +31,7 @@ const Trips: React.FC = () => {
           Find the perfect adventure for you, your partner, or your group.
         </p>
       </section>
-      
+
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '2.5rem 2vw 0 2vw', display: 'flex', flexWrap: 'wrap', gap: '2.5rem', justifyContent: 'center' }}>
         {trips.map((trip, idx) => (
           <Card key={idx} imageSrc={trip.imageSrc} title={trip.title} details={trip.details} />
@@ -44,11 +44,11 @@ const Trips: React.FC = () => {
           <h2 style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 800, color: '#1a237e', marginBottom: '3rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
             Upcoming Group Trips
           </h2>
-          
+
           {/* Morocco Trip */}
           <TripCard
             reverse={false}
-            imageSrc="src/assets/cards/IMG-20250620-WA0046.jpg"
+            imageSrc="src/assets/IMG-20250620-WA0065.jpg"
             title="Morocco Adventure 20th - 23rd of June"
             description="Experience the magic of Morocco with our curated adventure package. Explore ancient medinas, ride camels in the Sahara, and immerse yourself in rich culture."
             bulletPoints={[
@@ -59,14 +59,14 @@ const Trips: React.FC = () => {
               "Sahara desert tour",
               "Traditional Moroccan dinner"
             ]}
-            price="€750"
+            price="€600 per person"
             duration="4 Days"
           />
 
           {/* Albania Trip (May) */}
           <TripCard
             reverse={true}
-            imageSrc="src/assets/cards/IMG-20250620-WA0050.jpg"
+            imageSrc="src/assets/15+Places+You+Must+Visit+in+Albania1.jpg"
             title="Albania Discovery 23rd - 26th of May"
             description="Discover the hidden gem of Albania with pristine beaches, ancient ruins, and stunning mountain landscapes."
             bulletPoints={[
@@ -77,14 +77,14 @@ const Trips: React.FC = () => {
               "Coastal boat tour",
               "Historical city tour"
             ]}
-            price="€550"
+            price="€600 per person"
             duration="4 Days"
           />
 
           {/* Thailand Trip */}
           <TripCard
             reverse={false}
-            imageSrc="src/assets/cards/IMG-20250620-WA0054.jpg"
+            imageSrc="src/assets/thailandnwbeachsplash.jpg"
             title="Thailand Paradise 19th - 24th of September"
             description="Escape to tropical paradise with pristine beaches, vibrant culture, and unforgettable experiences in Thailand."
             bulletPoints={[
@@ -95,14 +95,14 @@ const Trips: React.FC = () => {
               "Island hopping tour",
               "Thai cooking class"
             ]}
-            price="€950"
+            price="€1300 per person"
             duration="6 Days"
           />
 
           {/* Greece Trip */}
           <TripCard
             reverse={true}
-            imageSrc="src/assets/cards/IMG-20250620-WA0048.jpg"
+            imageSrc="src/assets/65c27d6543bb77284ba42029.jpeg"
             title="Greece Islands 10th - 13th of October"
             description="Experience the beauty of Greek islands with crystal clear waters, white-washed buildings, and Mediterranean charm."
             bulletPoints={[
@@ -113,14 +113,14 @@ const Trips: React.FC = () => {
               "Island boat cruise",
               "Sunset dinner experience"
             ]}
-            price="€680"
+            price="€800 per person"
             duration="4 Days"
           />
 
           {/* Switzerland Trip */}
           <TripCard
             reverse={false}
-            imageSrc="src/assets/cards/IMG-20250620-WA0046.jpg"
+            imageSrc="src/assets/IMG-20250620-WA0057.jpg"
             title="Switzerland Alpine 20th - 23rd of November"
             description="Experience the majestic Swiss Alps with breathtaking mountain views, charming villages, and world-class hospitality."
             bulletPoints={[
@@ -138,9 +138,9 @@ const Trips: React.FC = () => {
           {/* Albania Trip (July) - Original */}
           <TripCard
             reverse={true}
-            imageSrc="src/assets/cards/IMG-20250620-WA0048.jpg"
+            imageSrc="src/assets/jyoshankar_travelblogger_desertluxurycamp_morocco_merzouga_saharadesert_glamping_ergchebbi_2.jpg"
             title="Albania Tour 11th - 14th of July"
-            description="600 euros per person"
+            description="Enjoy beautiful beaches, explore old towns, and discover rugged landscapes. affordable getaway with genuine hospitality and diverse appeal."
             bulletPoints={[
               "Return flight tickets",
               "Airport transfer",
@@ -149,7 +149,7 @@ const Trips: React.FC = () => {
               "Boat cruise",
               "Paint and sip by the beach"
             ]}
-            price="€600"
+            price="€600 per person"
             duration="4 Days"
           />
         </div>
