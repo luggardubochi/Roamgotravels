@@ -1,5 +1,7 @@
 # Roamgo Travels
 
+<center><img src="frontend/src/assets/roamtravel_logo.png" alt="Roamgo Portfolio"></center>
+
 A full-stack travel booking platform built with React (Vite) frontend and NestJS/Express backend. This application provides a complete travel agency experience with user authentication, trip management, booking system, and admin functionality.
 
 ## Features
