@@ -137,43 +137,29 @@ Whether you are a seasoned traveler or you finally mustered up the courage to ta
       </section>
 
 
-      {/* Team Section */}
+      {/* Founder Section */}
       <section className="team-section">
         <div className="container">
-          <h2>Meet Our Team</h2>
-          <p className="team-intro">Our passionate team of travel experts is here to make your dreams come true</p>
-          <div className="team-grid">
-            <div className="team-member">
-              <div className="member-image">
-                <img src="/src/assets/cards/IMG-20250620-WA0046.jpg" alt="Sarah Johnson" />
+          <h2>Meet The Founder</h2>
+          <div className="container">
+            <div className="story-content">
+              <div className="story-image">
+                <img src="/src/assets/IMG-20250620-WA0048.jpg" alt="Our team exploring the world" />
               </div>
-              <h3>Sarah Johnson</h3>
-              <p className="member-role">Founder & CEO</p>
-              <p className="member-bio">With 15+ years in the travel industry, Sarah's passion for authentic experiences drives our company's vision and growth.</p>
-            </div>
-            <div className="team-member">
-              <div className="member-image">
-                <img src="/src/assets/cards/IMG-20250620-WA0050.jpg" alt="Michael Chen" />
+              <div className="story-text">
+                <p>
+                  I'm Sheba Monday, Founder and CEO of RoamGo Travels where we believe the world is meant to be explored with heart, joy and intentions. 
+                </p>
+                <p>
+                  Travel has always been more than just destinations to me. It's about the connections, the laughter, the unforgetable experiences and the beautiful souls we meet along the way. Thah's what inspired me to create RoamGo Travels! A space where women (and men too) can explore the world confidently, safely and stylishly where solo or in a vibrant group.
+                </p>
+                <p>
+                  At RoamGo, every client is a famil. I take greeat pride in personally curating every trip with  care and attention to details from carefuly selected destinations and boutique hotels, to visasupport and unique cultural experiences. Whetheryou're chasing your first solo trip, planning a luxury escape or joining one of out signature group tours, I want to feel seen, heared and xared for
+                </p>
+                <p>Over the years, RoamFo travels has grown into a warm, trusted travel famil where real friendship are born, laughter flows wasily and memories are ceated that last a lifetime.</p>
+                <p>I am deeply grateful for every sing person who trusts me with their holiday dreams. Your intentional support means everything and i'm committed to making sure every trip feels special seamless and empowering</p>
+                <p>Let's roam the world together. </p>
               </div>
-              <h3>Michael Chen</h3>
-              <p className="member-role">Co-Founder & COO</p>
-              <p className="member-bio">Michael's expertise in operations and logistics ensures every trip runs smoothly from start to finish.</p>
-            </div>
-            <div className="team-member">
-              <div className="member-image">
-                <img src="/src/assets/cards/IMG-20250620-WA0054.jpg" alt="Emma Rodriguez" />
-              </div>
-              <h3>Emma Rodriguez</h3>
-              <p className="member-role">Head of Customer Experience</p>
-              <p className="member-bio">Emma leads our customer service team, ensuring every traveler receives personalized attention and support.</p>
-            </div>
-            <div className="team-member">
-              <div className="member-image">
-                <img src="/src/assets/cards/IMG-20250620-WA0048.jpg" alt="David Kim" />
-              </div>
-              <h3>David Kim</h3>
-              <p className="member-role">Senior Travel Consultant</p>
-              <p className="member-bio">David's extensive knowledge of Asian destinations makes him the go-to expert for travelers exploring the Far East.</p>
             </div>
           </div>
         </div>

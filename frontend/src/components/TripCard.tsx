@@ -1,7 +1,9 @@
 import React from 'react';
 import './TripCard.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface TripCardProps {
+  id: string,
   reverse: boolean;
   imageSrc: string;
   title: string;
@@ -12,6 +14,7 @@ interface TripCardProps {
 }
 
 const TripCard: React.FC<TripCardProps> = ({
+  id,
   reverse,
   imageSrc,
   title,
@@ -20,8 +23,9 @@ const TripCard: React.FC<TripCardProps> = ({
   price,
   duration
 }) => {
+  const navigate = useNavigate();
   const contentSection = (
-    <div className="trip-content">
+    <div className="trip-content" id={id}>
       <h2 className="trip-title">{title}</h2>
       <p className="trip-description">{description}</p>
       
@@ -39,7 +43,7 @@ const TripCard: React.FC<TripCardProps> = ({
         ))}
       </ul>
       
-      <button className="book-me-btn">
+      <button className="book-me-btn" onClick={ () => navigate(`\\bookme?id=${id}`)}>
         Book Me
       </button>
     </div>

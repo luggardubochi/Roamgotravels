@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../components/Card';
 import TripCard from '../components/TripCard';
+import { GroupTripInfo } from '../components/TripInfo';
 
 const trips = [
   {
@@ -45,113 +46,17 @@ const Trips: React.FC = () => {
             Upcoming Group Trips
           </h2>
 
-          {/* Morocco Trip */}
+          {GroupTripInfo.map((value) => (
           <TripCard
-            reverse={false}
-            imageSrc="src/assets/IMG-20250620-WA0065.jpg"
-            title="Morocco Adventure 20th - 23rd of June"
-            description="Experience the magic of Morocco with our curated adventure package. Explore ancient medinas, ride camels in the Sahara, and immerse yourself in rich culture."
-            bulletPoints={[
-              "Return flight tickets",
-              "Airport transfer",
-              "3 nights stay at a 4 star hotel",
-              "Daily breakfast",
-              "Sahara desert tour",
-              "Traditional Moroccan dinner"
-            ]}
-            price="€600 per person"
-            duration="4 Days"
-          />
-
-          {/* Albania Trip (May) */}
-          <TripCard
-            reverse={true}
-            imageSrc="src/assets/15+Places+You+Must+Visit+in+Albania1.jpg"
-            title="Albania Discovery 23rd - 26th of May"
-            description="Discover the hidden gem of Albania with pristine beaches, ancient ruins, and stunning mountain landscapes."
-            bulletPoints={[
-              "Return flight tickets",
-              "Airport transfer",
-              "3 nights stay at a 4 star hotel",
-              "Daily breakfast",
-              "Coastal boat tour",
-              "Historical city tour"
-            ]}
-            price="€600 per person"
-            duration="4 Days"
-          />
-
-          {/* Thailand Trip */}
-          <TripCard
-            reverse={false}
-            imageSrc="src/assets/thailandnwbeachsplash.jpg"
-            title="Thailand Paradise 19th - 24th of September"
-            description="Escape to tropical paradise with pristine beaches, vibrant culture, and unforgettable experiences in Thailand."
-            bulletPoints={[
-              "Return flight tickets",
-              "Airport transfer",
-              "5 nights stay at a 4 star hotel",
-              "Daily breakfast",
-              "Island hopping tour",
-              "Thai cooking class"
-            ]}
-            price="€1300 per person"
-            duration="6 Days"
-          />
-
-          {/* Greece Trip */}
-          <TripCard
-            reverse={true}
-            imageSrc="src/assets/65c27d6543bb77284ba42029.jpeg"
-            title="Greece Islands 10th - 13th of October"
-            description="Experience the beauty of Greek islands with crystal clear waters, white-washed buildings, and Mediterranean charm."
-            bulletPoints={[
-              "Return flight tickets",
-              "Airport transfer",
-              "3 nights stay at a 4 star hotel",
-              "Daily breakfast",
-              "Island boat cruise",
-              "Sunset dinner experience"
-            ]}
-            price="€800 per person"
-            duration="4 Days"
-          />
-
-          {/* Switzerland Trip */}
-          <TripCard
-            reverse={false}
-            imageSrc="src/assets/IMG-20250620-WA0057.jpg"
-            title="Switzerland Alpine 20th - 23rd of November"
-            description="Experience the majestic Swiss Alps with breathtaking mountain views, charming villages, and world-class hospitality."
-            bulletPoints={[
-              "Return flight tickets",
-              "Airport transfer",
-              "3 nights stay at a 4 star hotel",
-              "Daily breakfast",
-              "Mountain cable car ride",
-              "Swiss chocolate tasting"
-            ]}
-            price="€850"
-            duration="4 Days"
-          />
-
-          {/* Albania Trip (July) - Original */}
-          <TripCard
-            reverse={true}
-            imageSrc="src/assets/jyoshankar_travelblogger_desertluxurycamp_morocco_merzouga_saharadesert_glamping_ergchebbi_2.jpg"
-            title="Albania Tour 11th - 14th of July"
-            description="Enjoy beautiful beaches, explore old towns, and discover rugged landscapes. affordable getaway with genuine hospitality and diverse appeal."
-            bulletPoints={[
-              "Return flight tickets",
-              "Airport transfer",
-              "3 nights stay at a 4 star hotel",
-              "Daily breakfast",
-              "Boat cruise",
-              "Paint and sip by the beach"
-            ]}
-            price="€600 per person"
-            duration="4 Days"
-          />
+            id={value.id}
+            reverse={value.reverse}
+            imageSrc={value.imagesrc}
+            title={value.title}
+            description={value.description}
+            bulletPoints={value.bulletpoints}
+            price={value.price}
+            duration={value.duration}
+          />))}
         </div>
       </section>
     </div>
