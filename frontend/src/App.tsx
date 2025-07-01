@@ -1,6 +1,6 @@
 import React from 'react'
 // import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
@@ -13,15 +13,17 @@ import Footer from './components/Footer'
 import Contact from './pages/Contact'
 import About from './pages/About'
 import Booking from './pages/Booking'
-
+import BookMePage from './pages/BookMePage'
+import { SchengenPage } from './pages/schengenvisa'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token');
+  const location = useLocation();
   if (!token) {
-    window.location.replace('/login?redirected=true')
-    return null
+    // Redirect to login with redirect param
+    return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname + location.search)}`} replace />;
   }
-  return <>{children}</>
+  return <>{children}</>;
 }
 
 function App() {
@@ -38,6 +40,13 @@ function App() {
         <Route path="/trip" element={<Trips />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        {/* BookMePage routes (protected) */}
+        <Route path="/bookme" element={<PrivateRoute><BookMePage /></PrivateRoute>} />
+        <Route path="/bookme/:id" element={<PrivateRoute><BookMePage /></PrivateRoute>} />
+        <Route path="/getvisa/:id" element={<PrivateRoute><SchengenPage /></PrivateRoute>} />
+        <Route path="/bookme/type/:type" element={<PrivateRoute><BookMePage /></PrivateRoute>} />
+        <Route path="/bookme/:id/type/:type" element={<PrivateRoute><BookMePage /></PrivateRoute>} />
+        {/* Booking routes */}
         <Route path="/booking" element={<PrivateRoute><Booking /></PrivateRoute>} />
         <Route path="/booking/:bookingId" element={<PrivateRoute><Booking /></PrivateRoute>} />
       </Routes>

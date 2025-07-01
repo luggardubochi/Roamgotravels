@@ -5,12 +5,14 @@ const currentYear = new Date().getFullYear();
 
 const Footer: React.FC = () => (
   <footer style={{
-    width: '100vw',
-    // background: '#e65100', // dark orange
+    width: '100%',
+    position: 'sticky',
+    left: 0,
+    bottom: 0,
+    zIndex: 100,
     color: '#fff',
     padding: '2.5rem 0 1.2rem 0',
     textAlign: 'center',
-    // marginTop: '40px',
     fontFamily: 'Poppins, Inter, Arial, sans-serif',
     borderTop: '3px solid #ff7043',
     background: 'linear-gradient(90deg, #ff7043 100%, #fff3e0 2000%)'

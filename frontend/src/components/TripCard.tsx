@@ -1,6 +1,6 @@
 import React from 'react';
 import './TripCard.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface TripCardProps {
   id: string,
@@ -24,6 +24,15 @@ const TripCard: React.FC<TripCardProps> = ({
   duration
 }) => {
   const navigate = useNavigate();
+  const handleBookMe = () => {
+    const token = localStorage.getItem('token');
+    const targetUrl = `/bookme/${id}`;
+    if (!token) {
+      navigate(`/login?redirect=${encodeURIComponent(targetUrl)}`);
+    } else {
+      navigate(targetUrl);
+    }
+  };
   const contentSection = (
     <div className="trip-content" id={id}>
       <h2 className="trip-title">{title}</h2>
@@ -43,7 +52,7 @@ const TripCard: React.FC<TripCardProps> = ({
         ))}
       </ul>
       
-      <button className="book-me-btn" onClick={ () => navigate(`\\bookme?id=${id}`)}>
+      <button className="book-me-btn" onClick={handleBookMe}>
         Book Me
       </button>
     </div>
