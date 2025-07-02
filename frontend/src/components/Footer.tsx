@@ -22,8 +22,10 @@ const Footer: React.FC = () => (
       <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', fontSize: '1.05rem' }}>
         <a href="/" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Home</a>
         <a href="/trip" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Trip</a>
+        <a href="/past-trip" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Past Trip</a>
         <a href="/about" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>About Us</a>
         <a href="/contact" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Contact</a>
+        <a href="/terms" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Terms & Conditions</a>
         {/* <a href="/career" style={{ color: '#fff', textDecoration: 'none', opacity: 0.95, fontWeight: 600 }}>Career</a> */}
       </div>
       <div style={{ display: 'flex', gap: '1.2rem', justifyContent: 'center', margin: '0.5rem 0' }}>

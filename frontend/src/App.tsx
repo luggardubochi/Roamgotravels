@@ -15,6 +15,8 @@ import About from './pages/About'
 import Booking from './pages/Booking'
 import BookMePage from './pages/BookMePage'
 import { SchengenPage } from './pages/schengenvisa'
+import PastTrip from './pages/PastTrip'
+import TermsAndConditions from './pages/TermsAndConditions'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('token');
@@ -40,6 +42,7 @@ function App() {
         <Route path="/trip" element={<Trips />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/past-trip" element={<PastTrip />} />
         {/* BookMePage routes (protected) */}
         <Route path="/bookme" element={<PrivateRoute><BookMePage /></PrivateRoute>} />
         <Route path="/bookme/:id" element={<PrivateRoute><BookMePage /></PrivateRoute>} />
@@ -49,6 +52,7 @@ function App() {
         {/* Booking routes */}
         <Route path="/booking" element={<PrivateRoute><Booking /></PrivateRoute>} />
         <Route path="/booking/:bookingId" element={<PrivateRoute><Booking /></PrivateRoute>} />
+        <Route path="/terms" element={<TermsAndConditions />} />
       </Routes>
       <Footer />
     </Router>

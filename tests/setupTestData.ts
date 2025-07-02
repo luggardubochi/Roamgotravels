@@ -8,6 +8,7 @@ export let tripId: string;
 export let userBookingId: string;
 
 beforeAll(async () => {
+  // console.log(app)
   // Create admin user
   const adminEmail = `admin${Date.now()}@test.com`;
   const adminUsername = `admin${Date.now()}`;
@@ -58,8 +59,11 @@ beforeAll(async () => {
       startDate: '2024-07-01',
       endDate: '2024-07-10',
       bookingType: 'single',
-      bulletPoints: [{ name: 'Test bullet' }],
+      bulletPoints: [{ name: 'Test bullet', id: "12323" }],
     });
+    const trips = await request(app).get('/booking')
+    .set('Authorization', `Bearer ${adminToken}`);
+    console.log(trips.body)
   tripId = tripRes.body.booking.id;
 
   // Create a user booking as the test user

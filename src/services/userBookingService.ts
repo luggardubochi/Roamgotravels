@@ -40,7 +40,6 @@ export async function updateUserBooking(id: string, data: any, user: { user_id: 
   if (user.role !== 'admin' && booking.user.user_id !== user.user_id) {
     throw new Error('Forbidden');
   }
-  // Only allow updating certain fields
   const updatableFields = ['startDate', 'endDate', 'travelers', 'notes', 'status'];
   for (const key of updatableFields) {
     if (data[key] !== undefined) {

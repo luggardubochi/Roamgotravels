@@ -3,8 +3,8 @@ import app from '../src/index';
 
 describe('Auth Endpoints', () => {
   const testUser = {
-    email: `testuser${Date.now()}@example.com`,
-    username: `testuser${Date.now()}`,
+    email: `testuserrs${Date.now()}@example.com`,
+    username: `testuserrs${Date.now()}`,
     password: 'TestPass123!',
     first_name: 'Test',
     last_name: 'User',

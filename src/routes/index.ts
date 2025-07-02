@@ -10,6 +10,7 @@ import * as userController from '../controllers/userController';
 import { sensitiveLimiter } from '../middlewares/rateLimit';
 import * as bookingController from '../controllers/bookingController';
 import * as userBooking from '../controllers/userBookingController';
+import * as tripController from '../controllers/tripcontroller';
 
 const router = Router();
 
@@ -65,5 +66,12 @@ router.delete('/bookings/bullet/remove', authenticateJWT, requireRole('admin'), 
 router.post('/bookings/bullet/add', authenticateJWT, requireRole('admin'), bookingController.addBulletPoint);
 // @ts-ignore
 router.get('/bookings/bullet/:id', authenticateJWT, requireRole('admin'), bookingController.getSingleBullet);
+
+// @ts-ignore
+router.get("/trip/all", authenticateJWT, requireRole('admin'), tripController.getTrips);
+// @ts-ignore
+router.post("/trip/add", authenticateJWT, tripController.addTrip);
+// @ts-ignore
+router.patch("/trip/update", authenticateJWT, requireRole('admin'), tripController.updateTripStatus);
 
 export default router; 

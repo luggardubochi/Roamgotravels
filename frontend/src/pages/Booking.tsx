@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './Booking.css';
+import '../style/Booking.css';
 import { BACKEND_API } from '../components/config';
 
 const Booking: React.FC = () => {

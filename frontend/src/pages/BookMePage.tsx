@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BACKEND_API } from '../components/config';
+import { useNavigate } from 'react-router-dom';
 
 const initialCompanion = {
     fullName: '',
@@ -192,10 +194,41 @@ const BookMePage: React.FC = () => {
         }
     };
 
-    const handleMergedSubmit = (e: React.FormEvent) => {
+    const handleMergedSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here you would send all booking data to backend
-        alert('Booking confirmed!');
+        const dura = duration.length < 1 ? duration : durationSpecify;
+        let data = {
+            ...personal,
+            companion: [...companions],
+            emergencycontact: emergency,
+            location: locationPrefs,
+            hotelprefs: [...hotelPrefs, hotelOther],
+            duration: dura,
+            holidayvibe: holidayVibe,
+            holidaybudget: holidayBudget,
+            holidaybudgetcurrency: holidayBudgetCurrency,
+            additionalnotes: additionalNotes
+        };
+        for (const key in data) {
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
+                // @ts-ignore
+                const element = data[key];
+                console.log(element);
+            }
+        };
+        let navigate = useNavigate();
+        const token = localStorage.getItem('token');
+        let res = await fetch(BACKEND_API + '/api/trip/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error('Failed to save booking');
+        setTimeout(() => navigate('/'), 1200);
+        alert('Booking confirmed! trying ');
     };
 
     return (

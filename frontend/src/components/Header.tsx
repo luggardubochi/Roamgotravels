@@ -27,6 +27,7 @@ const Header: React.FC = () => {
         <nav className={`header-nav${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(false)}>
           <Link to="/">Home</Link>
           <Link to="/trip">Trip</Link>
+          <Link to="/past-trip">Past Trip</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact</Link>
           {/* <Link to="/career">Career</Link> */}

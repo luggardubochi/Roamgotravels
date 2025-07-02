@@ -1,5 +1,5 @@
 import React from 'react';
-import './About.css';
+import '../style/About.css';
 
 const About: React.FC = () => {
   return (
@@ -144,11 +144,11 @@ Whether you are a seasoned traveler or you finally mustered up the courage to ta
           <div className="container">
             <div className="story-content">
               <div className="story-image">
-                <img src="/src/assets/IMG-20250620-WA0048.jpg" alt="Our team exploring the world" />
+                <img src="src/assets/IMG-20250625-WA0065.jpg" alt="Our team exploring the world" />
               </div>
               <div className="story-text">
                 <p>
-                  I'm Sheba Monday, Founder and CEO of RoamGo Travels where we believe the world is meant to be explored with heart, joy and intentions. 
+                  I'm Sheba Monday, Founder and CEO of RoamGo Travels where we believe the world is meant to be explored with heart, joy and intentions.
                 </p>
                 <p>
                   Travel has always been more than just destinations to me. It's about the connections, the laughter, the unforgetable experiences and the beautiful souls we meet along the way. Thah's what inspired me to create RoamGo Travels! A space where women (and men too) can explore the world confidently, safely and stylishly where solo or in a vibrant group.

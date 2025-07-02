@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Profile.css';
+import '../style/Profile.css';
 import { BACKEND_API } from '../components/config';
 
 const Profile = () => {
