@@ -30,6 +30,7 @@ const Header: React.FC = () => {
           <Link to="/past-trip">Past Trip</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact</Link>
+          <Link to={isLoggedIn ? "/profile" : ""}>{isLoggedIn ? 'Profile' : ''}</Link>
           {/* <Link to="/career">Career</Link> */}
         </nav>
         <div className="header-actions">

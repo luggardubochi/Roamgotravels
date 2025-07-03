@@ -28,6 +28,8 @@ export const changePasswordSchema = Joi.object({
   newPassword: Joi.string().min(6).required(),
 });
 
+
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')

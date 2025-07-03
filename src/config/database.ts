@@ -3,8 +3,9 @@ import { User } from '../models/user';
 import { UserBooking } from '../models/userBooking';
 import { Booking, BookingBulletPoint } from '../models/booking';
 import dotenv from 'dotenv';
-import { EmergencyContact, LocationPref, TripApplicationdb, TripPersonalInfo, TripUser } from '../models/tripapplication';
+import { Companion, EmergencyContact, LocationPref, TripApplicationdb, TripPersonalInfo, TripUser } from '../models/tripapplication';
 import { ContactInformation, PersonalInfo, TravelInfo, VisaApplicationdb } from '../models/visaapplication';
+import { Message } from '../models/message';
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ if (dbType === 'sqlite') {
   dataSourceOptions = {
     type: 'sqlite',
     database: process.env.SQLITE_DB_PATH || 'database.sqlite',
-    entities: [User, UserBooking, Booking, BookingBulletPoint, TripApplicationdb, EmergencyContact, LocationPref, TripUser, TripPersonalInfo, VisaApplicationdb, PersonalInfo, ContactInformation, TravelInfo],
+    entities: [User, UserBooking, Booking, BookingBulletPoint, TripApplicationdb, EmergencyContact, LocationPref, TripUser, TripPersonalInfo, VisaApplicationdb, PersonalInfo, ContactInformation, TravelInfo, Companion, Message],
     synchronize: true, // Set to false in production
   };
 } else {
@@ -27,7 +28,7 @@ if (dbType === 'sqlite') {
     username: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'test',
-    entities: [User, UserBooking, Booking, BookingBulletPoint, TripApplicationdb, EmergencyContact, LocationPref, TripUser, TripPersonalInfo, VisaApplicationdb, PersonalInfo, ContactInformation, TravelInfo],
+    entities: [User, UserBooking, Booking, BookingBulletPoint, TripApplicationdb, EmergencyContact, LocationPref, TripUser, TripPersonalInfo, VisaApplicationdb, PersonalInfo, ContactInformation, TravelInfo, Companion, Message],
     synchronize: true, // Set to false in production
   };
 }

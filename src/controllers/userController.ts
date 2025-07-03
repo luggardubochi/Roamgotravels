@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import * as userService from '../services/userService';
 import { AuthRequest } from '../middlewares/authMiddleware';
+import { AppDataSource } from '../config/database';
+import { User } from '../models/user';
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -70,4 +72,14 @@ export const changePassword = async (req: AuthRequest, res: Response) => {
       res.status(500).json({ message: 'Server error' });
     }
   }
-}; 
+};
+
+export async function getCurrentuser(req: AuthRequest, res: Response) {
+  const userRepo = AppDataSource.getRepository(User);
+  const user_id = req.user.id;
+  const user = await userRepo.findOne({ where: { user_id } })
+  if (user)
+    return res.status(200).json({ user })
+  else
+    return res.status(400).json({ message: "Unable to retrieve the users" })
+}

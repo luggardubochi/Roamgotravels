@@ -20,6 +20,7 @@ const Profile = () => {
         return;
       }
       const res = await fetch(BACKEND_API+'/api/profile', {
+        method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -28,7 +29,7 @@ const Profile = () => {
         setForm({
           email: data.user.email,
           username: data.user.username,
-          first_name: data.user.first_name,
+          first_name: data.user.firstname,
           last_name: data.user.last_name,
           phone_number: data.user.phone_number,
         });
@@ -239,7 +240,7 @@ const Profile = () => {
                         <p>{new Date(user.created_at || Date.now()).toLocaleDateString()}</p>
                       </div>
                     </div>
-                    <button onClick={() => setEditMode(true)} className="btn-primary">Edit Profile</button>
+                    <button onClick={() => setEditMode(true)} className="btn-primary" style={{paddingInline: "20px"}}>Edit Profile</button>
                   </div>
                 )}
               </div>
@@ -255,7 +256,7 @@ const Profile = () => {
                   <div className="empty-icon">✈️</div>
                   <h3>No bookings yet</h3>
                   <p>Start your adventure by exploring our amazing destinations!</p>
-                  <button onClick={() => navigate('/trip')} className="btn-primary">Browse Trips</button>
+                  <button onClick={() => navigate('/trip')} className="btn-primary" style={{paddingInline: "20px"}}>Browse Trips</button>
                 </div>
               </div>
             </div>

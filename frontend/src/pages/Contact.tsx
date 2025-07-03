@@ -1,42 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, type ChangeEvent } from 'react';
 import '../style/Contact.css';
+import { BACKEND_API } from '../components/config';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    fullname: '',
     email: '',
-    phone: '',
+    phone_number: '',
     subject: '',
     message: ''
   });
-  console.log(formData);
+
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-//     const { name, value } = e.target;
-//     setFormData(prev => ({
-//       ...prev,
-//       [name]: value
-//     }));
-//   };
+  //   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //     const { name, value } = e.target;
+  //     setFormData(prev => ({
+  //       ...prev,
+  //       [name]: value
+  //     }));
+  //   };
+
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    console.log(formData);
 
     // Simulate form submission
-    setTimeout(() => {
-      alert('Thank you for your message! We will get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
+    setTimeout(async () => {
       if (isSubmitting) {
         console.log("IT");
+      }
+      let req = await fetch(`${BACKEND_API}/api/contact/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      let res = await req.json()
+      console.log(res);
+      if (req.ok) {
+        alert('Thank you for your message! We will get back to you soon.');
+        setFormData({
+          fullname: '',
+          email: '',
+          phone_number: '',
+          subject: '',
+          message: ''
+        });
       }
       setIsSubmitting(false);
     }, 2000);
@@ -87,6 +104,8 @@ const Contact: React.FC = () => {
                     fontSize: '1rem'
                   }}
                   placeholder="Enter your full name"
+                  name='fullname'
+                  onChange={handleChange}
                 />
               </div>
 
@@ -105,6 +124,8 @@ const Contact: React.FC = () => {
                     fontSize: '1rem'
                   }}
                   placeholder="Enter your email address"
+                  name='email'
+                  onChange={handleChange}
                 />
               </div>
 
@@ -122,6 +143,8 @@ const Contact: React.FC = () => {
                     fontSize: '1rem'
                   }}
                   placeholder="Enter your phone number"
+                  name='phone_number'
+                  onChange={handleChange}
                 />
               </div>
 
@@ -138,12 +161,14 @@ const Contact: React.FC = () => {
                     borderRadius: '8px',
                     fontSize: '1rem'
                   }}
+                  onChange={e => handleChange(e)}
+                  name='subject'
                 >
                   <option value="">Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="booking">Booking Information</option>
-                  <option value="support">Customer Support</option>
-                  <option value="partnership">Partnership</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Booking Information">Booking Information</option>
+                  <option value="Customer Support">Customer Support</option>
+                  <option value="Partnership">Partnership</option>
                 </select>
               </div>
 
@@ -163,6 +188,8 @@ const Contact: React.FC = () => {
                     resize: 'vertical'
                   }}
                   placeholder="Tell us about your travel plans or any questions you have..."
+                  onChange={handleChange}
+                  name="message"
                 />
               </div>
 

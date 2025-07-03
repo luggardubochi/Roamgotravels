@@ -3,12 +3,12 @@ import { BACKEND_API } from '../components/config';
 import { useNavigate } from 'react-router-dom';
 
 const initialCompanion = {
-    fullName: '',
+    fullname: '',
     relationship: '',
     dob: '',
     phone: '',
-    passportNumber: '',
-    passportExpiry: '',
+    passportnumber: '',
+    passportexpiry: '',
 };
 
 const labelStyle = {
@@ -72,24 +72,25 @@ const packageTypeOptions = [
 
 const BookMePage: React.FC = () => {
     // Step state
+    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     // Personal Info
     const [personal, setPersonal] = useState({
-        fullName: '',
+        fullname: '',
         dob: '',
         phone: '',
-        countryCode: '+',
+        countrycode: '+',
         email: '',
         address: '',
         nationality: '',
-        passportNumber: '',
-        passportExpiry: '',
+        passportnumber: '',
+        passportexpiry: '',
     });
     // Travel Companions (optional, start empty)
     const [companions, setCompanions] = useState([] as typeof initialCompanion[]);
     // Emergency Contact
     const [emergency, setEmergency] = useState({
-        fullName: '',
+        fullname: '',
         relationship: '',
         phone: '',
         email: '',
@@ -102,7 +103,7 @@ const BookMePage: React.FC = () => {
         location1: '',
         location2: '',
         location3: '',
-        suggestForMe: 'no',
+        suggestforme: 'no',
     });
     // Hotel Aesthetic Preferences (step 3)
     const [hotelPrefs, setHotelPrefs] = useState<string[]>([]);
@@ -187,48 +188,54 @@ const BookMePage: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!confirmed) return;
-        if (isSoloTrip) {
-            setStep(2);
-        } else {
-            alert('Booking confirmed!');
-        }
+        // if (isSoloTrip) {
+        setStep(2);
+        // } else {
+        //     alert('Booking confirmed!');
+        // }
     };
 
     const handleMergedSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const dura = duration.length < 1 ? duration : durationSpecify;
+        const dura = duration != " " ? duration : durationSpecify;
         let data = {
-            ...personal,
-            companion: [...companions],
-            emergencycontact: emergency,
+            personalinfo: personal,
             location: locationPrefs,
-            hotelprefs: [...hotelPrefs, hotelOther],
             duration: dura,
+            hotelpref: [...hotelPrefs, hotelOther],
             holidayvibe: holidayVibe,
+            flightvisa: flightVisa,
+            packagetype: packageType,
             holidaybudget: holidayBudget,
             holidaybudgetcurrency: holidayBudgetCurrency,
-            additionalnotes: additionalNotes
+            additionalnotes: additionalNotes,
+            companion: [...companions],
+            emergencycontact: emergency,
         };
         for (const key in data) {
             if (Object.prototype.hasOwnProperty.call(data, key)) {
                 // @ts-ignore
                 const element = data[key];
-                console.log(element);
+                console.log(key, ": ", element);
             }
         };
-        let navigate = useNavigate();
         const token = localStorage.getItem('token');
-        let res = await fetch(BACKEND_API + '/api/trip/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(data),
-        });
-        if (!res.ok) throw new Error('Failed to save booking');
-        setTimeout(() => navigate('/'), 1200);
-        alert('Booking confirmed! trying ');
+        try {
+            let res = await fetch(BACKEND_API + '/api/trip/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(data),
+            });
+            console.log(await res.json());
+            if (!res.ok) throw new Error('Failed to save booking');
+            alert('Booking confirmed! trying ');
+            setTimeout(() => navigate('/'), 1200);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -264,7 +271,7 @@ const BookMePage: React.FC = () => {
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
                                 <div style={{ flex: 1, minWidth: 220 }}>
                                     <label htmlFor="personal-fullName" style={labelStyle}>Full Name</label>
-                                    <input id="personal-fullName" name="fullName" value={personal.fullName} onChange={handlePersonalChange} style={inputStyle} required />
+                                    <input id="personal-fullName" name="fullname" value={personal.fullname} onChange={handlePersonalChange} style={inputStyle} required />
                                 </div>
                                 <div style={{ flex: 1, minWidth: 180 }}>
                                     <label htmlFor="personal-dob" style={labelStyle}>Date of Birth</label>
@@ -274,7 +281,7 @@ const BookMePage: React.FC = () => {
                             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
                                 <div style={{ width: 80 }}>
                                     <label htmlFor="personal-countryCode" style={labelStyle}>Country Code</label>
-                                    <input id="personal-countryCode" name="countryCode" value={personal.countryCode} onChange={handlePersonalChange} style={inputStyle} required />
+                                    <input id="personal-countryCode" name="countrycode" value={personal.countrycode} onChange={handlePersonalChange} style={inputStyle} required />
                                 </div>
                                 <div style={{ flex: 1, minWidth: 180 }}>
                                     <label htmlFor="personal-phone" style={labelStyle}>Phone Number</label>
@@ -296,11 +303,11 @@ const BookMePage: React.FC = () => {
                             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
                                 <div style={{ flex: 1, minWidth: 180 }}>
                                     <label htmlFor="personal-passportNumber" style={labelStyle}>Passport Number</label>
-                                    <input id="personal-passportNumber" name="passportNumber" value={personal.passportNumber} onChange={handlePersonalChange} style={inputStyle} required />
+                                    <input id="personal-passportNumber" name="passportnumber" value={personal.passportnumber} onChange={handlePersonalChange} style={inputStyle} required />
                                 </div>
                                 <div style={{ flex: 1, minWidth: 180 }}>
                                     <label htmlFor="personal-passportExpiry" style={labelStyle}>Passport Expiry Date</label>
-                                    <input id="personal-passportExpiry" name="passportExpiry" type="date" value={personal.passportExpiry} onChange={handlePersonalChange} style={inputStyle} required />
+                                    <input id="personal-passportExpiry" name="passportexpiry" type="date" value={personal.passportexpiry} onChange={handlePersonalChange} style={inputStyle} required />
                                 </div>
                             </div>
 
@@ -316,7 +323,7 @@ const BookMePage: React.FC = () => {
                                     <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
                                         <div style={{ flex: 1, minWidth: 180 }}>
                                             <label htmlFor={`companion-fullName-${idx}`} style={labelStyle}>Full Name of Travel Companion</label>
-                                            <input id={`companion-fullName-${idx}`} name="fullName" value={comp.fullName} onChange={e => handleCompanionChange(idx, e)} style={inputStyle} />
+                                            <input id={`companion-fullName-${idx}`} name="fullname" value={comp.fullname} onChange={e => handleCompanionChange(idx, e)} style={inputStyle} />
                                         </div>
                                         <div style={{ flex: 1, minWidth: 140 }}>
                                             <label htmlFor={`companion-relationship-${idx}`} style={labelStyle}>Relationship to Traveller</label>
@@ -336,11 +343,11 @@ const BookMePage: React.FC = () => {
                                     <div style={{ display: 'flex', gap: 12 }}>
                                         <div style={{ flex: 1, minWidth: 140 }}>
                                             <label htmlFor={`companion-passportNumber-${idx}`} style={labelStyle}>Passport Number</label>
-                                            <input id={`companion-passportNumber-${idx}`} name="passportNumber" value={comp.passportNumber} onChange={e => handleCompanionChange(idx, e)} style={inputStyle} />
+                                            <input id={`companion-passportNumber-${idx}`} name="passportnumber" value={comp.passportnumber} onChange={e => handleCompanionChange(idx, e)} style={inputStyle} />
                                         </div>
                                         <div style={{ flex: 1, minWidth: 140 }}>
                                             <label htmlFor={`companion-passportExpiry-${idx}`} style={labelStyle}>Passport Expiry Date</label>
-                                            <input id={`companion-passportExpiry-${idx}`} name="passportExpiry" type="date" value={comp.passportExpiry} onChange={e => handleCompanionChange(idx, e)} style={inputStyle} />
+                                            <input id={`companion-passportExpiry-${idx}`} name="passportexpiry" type="date" value={comp.passportexpiry} onChange={e => handleCompanionChange(idx, e)} style={inputStyle} />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -359,7 +366,7 @@ const BookMePage: React.FC = () => {
                             <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
                                 <div style={{ flex: 1, minWidth: 180 }}>
                                     <label htmlFor="emergency-fullName" style={labelStyle}>Full Name of Emergency Contact</label>
-                                    <input id="emergency-fullName" name="fullName" value={emergency.fullName} onChange={handleEmergencyChange} style={inputStyle} required />
+                                    <input id="emergency-fullName" name="fullname" value={emergency.fullname} onChange={handleEmergencyChange} style={inputStyle} required />
                                 </div>
                                 <div style={{ flex: 1, minWidth: 140 }}>
                                     <label htmlFor="emergency-relationship" style={labelStyle}>Relationship to Traveller</label>
@@ -404,23 +411,23 @@ const BookMePage: React.FC = () => {
                                 </p>
                                 <div style={{ marginBottom: 12 }}>
                                     <label htmlFor="location1" style={labelStyle}>Location 1</label>
-                                    <input id="location1" name="location1" value={locationPrefs.location1} onChange={handleLocationPrefChange} style={inputStyle} required={locationPrefs.suggestForMe === 'no'} disabled={locationPrefs.suggestForMe === 'yes'} />
+                                    <input id="location1" name="location1" value={locationPrefs.location1} onChange={handleLocationPrefChange} style={inputStyle} required={locationPrefs.suggestforme === 'no'} disabled={locationPrefs.suggestforme === 'yes'} />
                                 </div>
                                 <div style={{ marginBottom: 12 }}>
                                     <label htmlFor="location2" style={labelStyle}>Location 2</label>
-                                    <input id="location2" name="location2" value={locationPrefs.location2} onChange={handleLocationPrefChange} style={inputStyle} required={locationPrefs.suggestForMe === 'no'} disabled={locationPrefs.suggestForMe === 'yes'} />
+                                    <input id="location2" name="location2" value={locationPrefs.location2} onChange={handleLocationPrefChange} style={inputStyle} required={locationPrefs.suggestforme === 'no'} disabled={locationPrefs.suggestforme === 'yes'} />
                                 </div>
                                 <div style={{ marginBottom: 12 }}>
                                     <label htmlFor="location3" style={labelStyle}>Location 3</label>
-                                    <input id="location3" name="location3" value={locationPrefs.location3} onChange={handleLocationPrefChange} style={inputStyle} required={locationPrefs.suggestForMe === 'no'} disabled={locationPrefs.suggestForMe === 'yes'} />
+                                    <input id="location3" name="location3" value={locationPrefs.location3} onChange={handleLocationPrefChange} style={inputStyle} required={locationPrefs.suggestforme === 'no'} disabled={locationPrefs.suggestforme === 'yes'} />
                                 </div>
                                 <div style={{ marginBottom: 12 }}>
                                     <span style={{ fontWeight: 600, color: '#222', marginRight: 12 }}>Please pick/suggest for me:</span>
                                     <label style={{ marginRight: 16 }}>
-                                        <input type="radio" name="suggestForMe" value="yes" checked={locationPrefs.suggestForMe === 'yes'} onChange={handleLocationPrefChange} /> Yes
+                                        <input type="radio" name="suggestforme" value="yes" checked={locationPrefs.suggestforme === 'yes'} onChange={handleLocationPrefChange} /> Yes
                                     </label>
                                     <label>
-                                        <input type="radio" name="suggestForMe" value="no" checked={locationPrefs.suggestForMe === 'no'} onChange={handleLocationPrefChange} /> No
+                                        <input type="radio" name="suggestforme" value="no" checked={locationPrefs.suggestforme === 'no'} onChange={handleLocationPrefChange} /> No
                                     </label>
                                 </div>
                             </div>

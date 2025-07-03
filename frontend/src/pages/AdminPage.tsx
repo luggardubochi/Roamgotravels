@@ -1,51 +1,52 @@
 import React, { useState, useEffect } from 'react';
+import { BACKEND_API } from '../components/config';
 
 interface User {
   id: string;
   email: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   role: string;
-  isActive: boolean;
-  createdAt: string;
-  lastLogin?: string;
+  is_active: boolean;
+  created_at: string;
+  last_login?: string;
 }
 
 interface TripApplication {
   id: string;
   user: {
-    fullName: string;
+    fullname: string;
     email: string;
   };
-  personalInfo: {
-    fullName: string;
+  personalinfo: {
+    fullname: string;
     phone: string;
     email: string;
     nationality: string;
   };
-  locationPrefs: {
+  location: {
     location1: string;
     location2: string;
     location3: string;
-    suggestForMe: string;
+    suggestforme: string;
   };
-  hotelPrefs: string[];
+  hotelprefs: string[];
   duration: string;
-  holidayVibe: string;
-  flightVisa: string[];
-  packageType: string;
-  holidayBudget: string;
-  holidayBudgetCurrency: string;
-  additionalNotes: string;
+  holidayvibe: string;
+  flightvisa: string[];
+  packagetype: string;
+  holidaybudget: string;
+  holidaybudgetcurrency: string;
+  additionalnotes: string;
   companions: any[];
-  emergencyContact: {
-    fullName: string;
+  emergencycontact: {
+    fullname: string;
     phone: string;
     email: string;
   };
   status: 'pending' | 'reviewed' | 'approved' | 'rejected';
-  submittedAt: string;
-} 
+  submittedat: string;
+}
 
 interface VisaApplication {
   id: string;
@@ -93,7 +94,7 @@ const AdminPage: React.FC = () => {
   const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+  console.log(contactSubmissions);
   // Mock data for visa applications and contact submissions
   const mockVisaApplications: VisaApplication[] = [
     {
@@ -146,36 +147,6 @@ const AdminPage: React.FC = () => {
     }
   ];
 
-  const mockContactSubmissions: ContactSubmission[] = [
-    {
-      id: '1',
-      name: 'Alice Johnson',
-      email: 'alice@example.com',
-      subject: 'General Inquiry',
-      message: 'I would like to know more about your travel packages to Europe.',
-      status: 'new',
-      submittedAt: '2024-01-25T09:00:00Z'
-    },
-    {
-      id: '2',
-      name: 'Bob Wilson',
-      email: 'bob@example.com',
-      subject: 'Booking Question',
-      message: 'Do you offer group discounts for 10+ people?',
-      status: 'read',
-      submittedAt: '2024-01-24T16:30:00Z'
-    },
-    {
-      id: '3',
-      name: 'Carol Brown',
-      email: 'carol@example.com',
-      subject: 'Visa Assistance',
-      message: 'I need help with Schengen visa application process.',
-      status: 'replied',
-      submittedAt: '2024-01-23T11:45:00Z'
-    }
-  ];
-
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
@@ -187,26 +158,40 @@ const AdminPage: React.FC = () => {
 
       try {
         // Fetch users
-        const usersRes = await fetch('/api/users', {
+        const usersRes = await fetch(`${BACKEND_API}/api/users`, {
+          method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
         if (usersRes.ok) {
           const usersData = await usersRes.json();
-          setUsers(usersData);
+          setUsers(usersData.users);
         }
 
         // Fetch trip applications (user bookings)
-        const tripsRes = await fetch('/api/user-bookings', {
+        const tripsRes = await fetch(`${BACKEND_API}/api/trip/all`, {
+          method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
+
         if (tripsRes.ok) {
-          const tripsData = await tripsRes.json();
-          setTripApplications(tripsData);
+        const tripsData = await tripsRes.json();
+          console.log(tripsData.data);
+          setTripApplications(tripsData.data);
+        }
+
+        const contact = await fetch(`${BACKEND_API}/api/contact/all`, {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (contact.ok) {
+          const submissions = await contact.json();
+          console.log("This is form contact OKAY", submissions);
+          setContactSubmissions(submissions.data);
         }
 
         // Use mock data for visa and contact forms
         setVisaApplications(mockVisaApplications);
-        setContactSubmissions(mockContactSubmissions);
 
       } catch (err) {
         setError('Failed to fetch data. Please try again.');
@@ -223,20 +208,20 @@ const AdminPage: React.FC = () => {
     if (!token) return;
 
     try {
-      let endpoint = '';
+      let endpoint = BACKEND_API;
       switch (type) {
         case 'trip':
-          endpoint = `/api/user-bookings/${id}`;
+          endpoint += `/api/trip/update`;
           break;
         case 'visa':
           // Mock update for visa applications
-          setVisaApplications(prev => 
+          setVisaApplications(prev =>
             prev.map(app => app.id === id ? { ...app, status: status as any } : app)
           );
           return;
         case 'contact':
           // Mock update for contact submissions
-          setContactSubmissions(prev => 
+          setContactSubmissions(prev =>
             prev.map(sub => sub.id === id ? { ...sub, status: status as any } : sub)
           );
           return;
@@ -245,12 +230,12 @@ const AdminPage: React.FC = () => {
       }
 
       const res = await fetch(endpoint, {
-        method: 'PUT',
-        headers: { 
+        method: 'PATCH',
+        headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}` 
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ status })
+        body: JSON.stringify({ status: status, id: id })
       });
 
       if (res.ok) {
@@ -416,10 +401,10 @@ const AdminPage: React.FC = () => {
   return (
     <div style={{ padding: '40px', background: '#f8f9fa', minHeight: '100vh' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <h1 style={{ 
-          fontSize: '2.5rem', 
-          fontWeight: 800, 
-          color: '#1976d2', 
+        <h1 style={{
+          fontSize: '2.5rem',
+          fontWeight: 800,
+          color: '#1976d2',
           marginBottom: '40px',
           textAlign: 'center'
         }}>
@@ -427,9 +412,9 @@ const AdminPage: React.FC = () => {
         </h1>
 
         {/* Tabs */}
-        <div style={{ 
-          display: 'flex', 
-          background: '#fff', 
+        <div style={{
+          display: 'flex',
+          background: '#fff',
           borderRadius: '8px 8px 0 0',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           marginBottom: '0'
@@ -481,18 +466,18 @@ const AdminPage: React.FC = () => {
                 <tbody>
                   {users.map(user => (
                     <tr key={user.id}>
-                      <td style={tdStyle}>{user.firstName} {user.lastName}</td>
+                      <td style={tdStyle}>{`${user.first_name} ${user.last_name}`}</td>
                       <td style={tdStyle}>{user.email}</td>
                       <td style={tdStyle}>
                         <span style={statusBadgeStyle(user.role)}>{user.role}</span>
                       </td>
                       <td style={tdStyle}>
-                        <span style={statusBadgeStyle(user.isActive ? 'active' : 'inactive')}>
-                          {user.isActive ? 'Active' : 'Inactive'}
+                        <span style={statusBadgeStyle(user.is_active ? 'active' : 'inactive')}>
+                          {user.is_active ? 'Active' : 'Inactive'}
                         </span>
                       </td>
-                      <td style={tdStyle}>{formatDate(user.createdAt)}</td>
-                      <td style={tdStyle}>{user.lastLogin ? formatDate(user.lastLogin) : 'Never'}</td>
+                      <td style={tdStyle}>{formatDate(user.created_at)}</td>
+                      <td style={tdStyle}>{user.last_login ? formatDate(user.last_login) : 'Never'}</td>
                       <td style={tdStyle}>
                         <button
                           style={{ ...actionButtonStyle, background: '#f44336', color: '#fff' }}
@@ -528,22 +513,25 @@ const AdminPage: React.FC = () => {
                 <tbody>
                   {tripApplications.map(app => (
                     <tr key={app.id}>
-                      <td style={tdStyle}>{app.personalInfo.fullName}</td>
+                      <td style={tdStyle}>{app.personalinfo.fullname}</td>
                       <td style={tdStyle}>
-                        <div>{app.personalInfo.email}</div>
-                        <div style={{ fontSize: '12px', color: '#666' }}>{app.personalInfo.phone}</div>
+                        <div>{app.personalinfo.email}</div>
+                        <div style={{ fontSize: '12px', color: '#666' }}>{app.personalinfo.phone}</div>
                       </td>
                       <td style={tdStyle}>
-                        {app.locationPrefs.suggestForMe === 'yes' ? 'Auto-suggest' : 
-                          `${app.locationPrefs.location1}, ${app.locationPrefs.location2}, ${app.locationPrefs.location3}`
+                        {app.location.suggestforme === 'yes' ? 'Auto-suggest' :
+                          `${app.location.location1}, ${app.location.location2}, ${app.location.location3}`
                         }
                       </td>
-                      <td style={tdStyle}>{app.packageType}</td>
-                      <td style={tdStyle}>{app.holidayBudget} {app.holidayBudgetCurrency}</td>
+                      <td style={tdStyle}>{app.packagetype}</td>
+                      <td style={tdStyle}>
+                        {app.holidaybudgetcurrency}
+                        {app.holidaybudget}
+                      </td>
                       <td style={tdStyle}>
                         <span style={statusBadgeStyle(app.status)}>{app.status}</span>
                       </td>
-                      <td style={tdStyle}>{formatDate(app.submittedAt)}</td>
+                      <td style={tdStyle}>{formatDate(app.submittedat)}</td>
                       <td style={tdStyle}>
                         <select
                           value={app.status}
@@ -648,7 +636,7 @@ const AdminPage: React.FC = () => {
                 <tbody>
                   {contactSubmissions.map(sub => (
                     <tr key={sub.id}>
-                      <td style={tdStyle}>{sub.name}</td>
+                      <td style={tdStyle}>{sub.fullname}</td>
                       <td style={tdStyle}>{sub.email}</td>
                       <td style={tdStyle}>{sub.subject}</td>
                       <td style={tdStyle}>
@@ -659,7 +647,7 @@ const AdminPage: React.FC = () => {
                       <td style={tdStyle}>
                         <span style={statusBadgeStyle(sub.status)}>{sub.status}</span>
                       </td>
-                      <td style={tdStyle}>{formatDate(sub.submittedAt)}</td>
+                      <td style={tdStyle}>{formatDate(sub.submittedat)}</td>
                       <td style={tdStyle}>
                         <select
                           value={sub.status}

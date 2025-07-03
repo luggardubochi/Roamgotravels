@@ -11,6 +11,8 @@ import { sensitiveLimiter } from '../middlewares/rateLimit';
 import * as bookingController from '../controllers/bookingController';
 import * as userBooking from '../controllers/userBookingController';
 import * as tripController from '../controllers/tripcontroller';
+import * as messageController from '../controllers/messagecontroller';
+import { MessageSchema } from '../models/message';
 
 const router = Router();
 
@@ -31,9 +33,8 @@ router.get('/', (req, res) => {
 router.post('/signup', sensitiveLimiter, validate(signupSchema), authController.signup);
 router.post('/login', sensitiveLimiter, validate(loginSchema), authController.login);
 
-router.get('/profile', authenticateJWT, (req: AuthRequest, res) => {
-  res.json({ user: req.user });
-});
+// @ts-ignore
+router.get('/profile', authenticateJWT, userController.getCurrentuser);
 
 router.get('/admin', authenticateJWT, requireRole('admin'), (req: AuthRequest, res) => {
   res.json({ message: 'Welcome, admin user!', user: req.user });
@@ -73,5 +74,13 @@ router.get("/trip/all", authenticateJWT, requireRole('admin'), tripController.ge
 router.post("/trip/add", authenticateJWT, tripController.addTrip);
 // @ts-ignore
 router.patch("/trip/update", authenticateJWT, requireRole('admin'), tripController.updateTripStatus);
+
+// @ts-ignore
+router.post("/contact/add", validate(MessageSchema), messageController.createMessage);
+// @ts-ignore
+router.get("/contact/all", authenticateJWT, requireRole("admin"), messageController.getallMessages);
+// @ts-ignore
+router.patch("/contact/update", authenticateJWT, requireRole("admin"), messageController.updateMessage);
+
 
 export default router; 

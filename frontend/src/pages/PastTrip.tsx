@@ -13,9 +13,9 @@ const pastTripImages = [
 ];
 
 const pastTripVideos = [
-  { src: 'public/videos/VID-20250620-WA0077.mp4', poster: pastTripImages[0], title: 'Past Trip Video 1', description: 'Our unforgettable adventure in Morocco, featuring camel rides, desert nights, and vibrant markets.' },
-  { src: 'public/videos/VID-20250620-WA0080.mp4', poster: pastTripImages[1], title: 'Past Trip Video 2', description: 'A breathtaking journey through the Swiss Alps, with stunning mountain views and cozy village stays.' },
-  { src: 'public/videos/VID-20250620-WA0081.mp4', poster: pastTripImages[2], title: 'Past Trip Video 3', description: 'Exploring the beautiful beaches and rich culture of Thailand, from island hopping to local cuisine.' },
+  { src: 'videos/VID-20250620-WA0077.mp4', poster: pastTripImages[0], title: 'Past Trip Video 1', description: 'Our unforgettable adventure in Morocco, featuring camel rides, desert nights, and vibrant markets.' },
+  { src: 'videos/VID-20250620-WA0080.mp4', poster: pastTripImages[1], title: 'Past Trip Video 2', description: 'A breathtaking journey through the Swiss Alps, with stunning mountain views and cozy village stays.' },
+  { src: 'videos/VID-20250620-WA0081.mp4', poster: pastTripImages[2], title: 'Past Trip Video 3', description: 'Exploring the beautiful beaches and rich culture of Thailand, from island hopping to local cuisine.' },
 ];
 
 const PastTrip: React.FC = () => {

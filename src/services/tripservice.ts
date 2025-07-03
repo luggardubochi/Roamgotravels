@@ -1,13 +1,16 @@
 import { DeepPartial } from "typeorm";
 import { AppDataSource } from "../config/database";
-import { EmergencyContact, LocationPref, TripApplicationSchema, TripApplicationdb, TripPersonalInfo, TripUser } from "../models/tripapplication";
+import { Companion, EmergencyContact, LocationPref, TripApplicationSchema, TripApplicationdb, TripPersonalInfo, TripUser } from "../models/tripapplication";
 import { Status } from "../models/visaapplication";
+import { User } from "../models/user";
 
 const tripRepo = () => AppDataSource.getRepository(TripApplicationdb);
 const personalinfo = () => AppDataSource.getRepository(TripPersonalInfo);
+const userRepo = AppDataSource.getRepository(User);
 const user = () => AppDataSource.getRepository(TripUser);
 const location = () => AppDataSource.getRepository(LocationPref);
 const contact = () => AppDataSource.getRepository(EmergencyContact);
+const compan = () => AppDataSource.getRepository(Companion);
 
 interface UserInterface {
     fullname: string,
@@ -25,7 +28,7 @@ interface LocationInterface {
     location1?: string,
     location2?: string,
     location3?: string,
-    suggestform?: string,
+    suggestforme?: string,
 }
 
 interface ContactInterface {
@@ -34,11 +37,20 @@ interface ContactInterface {
     email: string,
 }
 
+interface CompanionInterface {
+    fullname: string,
+    relationship: string,
+    dob: string,
+    phone: string,
+    passportnumber: string,
+    passportexpiry: string,
+}
+
 interface TripInterface {
-    user: UserInterface,
+    user: DeepPartial<User>,
     personalinfo: PersonalInfoInterface,
     location: LocationInterface,
-    hotelPref: Array<string>,
+    hotelpref: Array<string>,
     duration: string,
     holidayvibe: string,
     flightvisa: DeepPartial<string[]>,
@@ -46,20 +58,33 @@ interface TripInterface {
     holidaybudget: string,
     holidaybudgetcurrency: string,
     additionalnotes?: string,
-    companions?: Array<object>,
+    companion: DeepPartial<Companion>[],
     emergencycontact: ContactInterface,
     status: DeepPartial<Status>,
     submittedat: string
 }
 
 
-export async function addTrips(data: TripInterface) {
-    const trip = tripRepo().create(data);
-    trip.user = user().create(data.user);
-    trip.personalinfo = personalinfo().create(data.personalinfo);
-    trip.location = location().create(data.location);
-    trip.emergencycontact = contact().create(data.emergencycontact)
-    return true;
+export async function addTrips(user_id: string, data: TripInterface) {
+    console.log(data);
+    const user = await userRepo.findOneBy({ user_id }) as DeepPartial<User>;
+    if (user) {
+        const trip = tripRepo().create({
+            ...data,
+            user: user,
+            personalinfo: personalinfo().create(data.personalinfo),
+            location: location().create(data.location),
+            emergencycontact: contact().create(data.emergencycontact),
+        });
+        if (data.companion) {
+            trip.companions = data.companion.map(value => compan().create(value));
+        }
+
+        await tripRepo().save(trip);
+
+        return true;
+    }
+    return false;
 }
 
 export async function getAllTrips() {
@@ -74,7 +99,7 @@ export async function getAllTrips() {
 }
 
 export async function editsingletripstatus(id: string, status: string) {
-    const trip = await tripRepo().findOne({where: { id }})
+    const trip = await tripRepo().findOne({ where: { id } })
     if (!trip) throw new Error("Trip not found");
     switch (status) {
         case "review":
@@ -86,7 +111,7 @@ export async function editsingletripstatus(id: string, status: string) {
         case "rejected":
             trip.status = Status.rejected;
             break;
-        default: 
+        default:
             trip.status = Status.pending
             break;
     }
