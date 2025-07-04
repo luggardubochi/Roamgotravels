@@ -52,6 +52,13 @@ DB_USERNAME=root
 DB_PASSWORD=your_password
 DB_DATABASE=roamgotravels
 
+# These are the configurations for containerization
+MYSQL_PORT=3306
+MYSQL_USER=roamgotravels
+MYSQL_PASSWORD=your_own_password
+MYSQL_DATABASE=roamgotravels
+MYSQL_ROOT_PASSWORD=rootpassword
+
 
 # Cloudinary (for image uploads)
 CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -127,6 +134,20 @@ cd frontend
 npm run dev              # Start development server
 npm run build            # Build for production
 npm run preview          # Preview production build
+```
+
+### Containerization Scripts
+```bash
+# Ensure that the env file is filled with details for the application development.
+# Also ensure that docker is installed in the computer.
+
+
+# For linux users
+sudo docker compose build  # To build to docker container and image
+sudo docker compose up 	   # To run the docker container
+
+# For windows users, remove the sudo and run the application
+# Sudo implies running the application as root.
 ```
 
 ## Database Setup
