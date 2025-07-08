@@ -19,7 +19,7 @@ const Profile = () => {
         setError('No token found. Please log in.');
         return;
       }
-      const res = await fetch(BACKEND_API+'/api/profile', {
+      const res = await fetch(BACKEND_API + '/api/profile', {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -53,7 +53,7 @@ const Profile = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     if (!token || !user) return;
-    const res = await fetch(BACKEND_API+`/api/users/${user.user_id}`, {
+    const res = await fetch(BACKEND_API + `/api/users/${user.user_id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -112,28 +112,28 @@ const Profile = () => {
       {/* Navigation Tabs */}
       <div className="profile-nav">
         <div className="nav-container">
-          <button 
+          <button
             className={`nav-tab ${activeTab === 'profile' ? 'active' : ''}`}
             onClick={() => setActiveTab('profile')}
           >
             <span className="tab-icon">👤</span>
             Profile
           </button>
-          <button 
+          <button
             className={`nav-tab ${activeTab === 'bookings' ? 'active' : ''}`}
             onClick={() => setActiveTab('bookings')}
           >
             <span className="tab-icon">✈️</span>
             My Bookings
           </button>
-          <button 
+          <button
             className={`nav-tab ${activeTab === 'preferences' ? 'active' : ''}`}
             onClick={() => setActiveTab('preferences')}
           >
             <span className="tab-icon">⚙️</span>
             Preferences
           </button>
-          <button 
+          <button
             className={`nav-tab ${activeTab === 'security' ? 'active' : ''}`}
             onClick={() => setActiveTab('security')}
           >
@@ -162,47 +162,47 @@ const Profile = () => {
                     <div className="form-grid">
                       <div className="form-group">
                         <label>First Name</label>
-                        <input 
-                          name="first_name" 
-                          value={form.first_name || ''} 
-                          onChange={handleChange} 
+                        <input
+                          name="first_name"
+                          value={form.first_name || ''}
+                          onChange={handleChange}
                           placeholder="Enter your first name"
                         />
                       </div>
                       <div className="form-group">
                         <label>Last Name</label>
-                        <input 
-                          name="last_name" 
-                          value={form.last_name || ''} 
-                          onChange={handleChange} 
+                        <input
+                          name="last_name"
+                          value={form.last_name || ''}
+                          onChange={handleChange}
                           placeholder="Enter your last name"
                         />
                       </div>
                       <div className="form-group">
                         <label>Username</label>
-                        <input 
-                          name="username" 
-                          value={form.username || ''} 
-                          onChange={handleChange} 
+                        <input
+                          name="username"
+                          value={form.username || ''}
+                          onChange={handleChange}
                           placeholder="Enter your username"
                         />
                       </div>
                       <div className="form-group">
                         <label>Email</label>
-                        <input 
-                          name="email" 
+                        <input
+                          name="email"
                           type="email"
-                          value={form.email || ''} 
-                          onChange={handleChange} 
+                          value={form.email || ''}
+                          onChange={handleChange}
                           placeholder="Enter your email"
                         />
                       </div>
                       <div className="form-group">
                         <label>Phone Number</label>
-                        <input 
-                          name="phone_number" 
-                          value={form.phone_number || ''} 
-                          onChange={handleChange} 
+                        <input
+                          name="phone_number"
+                          value={form.phone_number || ''}
+                          onChange={handleChange}
                           placeholder="Enter your phone number"
                         />
                       </div>
@@ -240,7 +240,7 @@ const Profile = () => {
                         <p>{new Date(user.created_at || Date.now()).toLocaleDateString()}</p>
                       </div>
                     </div>
-                    <button onClick={() => setEditMode(true)} className="btn-primary" style={{paddingInline: "20px"}}>Edit Profile</button>
+                    <button onClick={() => setEditMode(true)} className="btn-primary" style={{ paddingInline: "20px" }}>Edit Profile</button>
                   </div>
                 )}
               </div>
@@ -256,7 +256,7 @@ const Profile = () => {
                   <div className="empty-icon">✈️</div>
                   <h3>No bookings yet</h3>
                   <p>Start your adventure by exploring our amazing destinations!</p>
-                  <button onClick={() => navigate('/trip')} className="btn-primary" style={{paddingInline: "20px"}}>Browse Trips</button>
+                  <button onClick={() => navigate('/trip')} className="btn-primary" style={{ paddingInline: "20px" }}>Browse Trips</button>
                 </div>
               </div>
             </div>
@@ -325,14 +325,6 @@ const Profile = () => {
             </div>
           )}
         </div>
-      </div>
-
-      {/* Logout Button */}
-      <div className="profile-footer">
-        <button onClick={handleLogout} className="logout-btn">
-          <span className="logout-icon">🚪</span>
-          Logout
-        </button>
       </div>
     </div>
   );

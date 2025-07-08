@@ -23,12 +23,12 @@ const trips = [
 
 const Trips: React.FC = () => {
   return (
-    <div style={{ width: '100vw', background: '#f7f9fc', minHeight: '100vh', paddingBottom: '40px' }}>
-      <section style={{ width: '100%', padding: '60px 0 30px 0', background: 'linear-gradient(90deg, #ff7043 0%, #fff3e0 100%)' }}>
-        <h1 style={{ textAlign: 'center', fontSize: '2.8rem', fontWeight: 900, color: '#fff', letterSpacing: '1.5px', textShadow: '0 2px 12px rgba(0,0,0,0.12)', fontFamily: 'Poppins, Inter, Arial, sans-serif', margin: 0 }}>
+    <div style={{ fontFamily: "'Nunito', 'Lato', Arial, sans-serif", width: '100vw', background: 'var(--color-neutral)', minHeight: '100vh', paddingBottom: '40px' }}>
+      <section style={{ width: '100%', padding: '60px 0 30px 0', background: 'linear-gradient(90deg, var(--color-accent) 0%, var(--color-neutral) 100%)' }}>
+        <h1 style={{ textAlign: 'center', fontSize: '2.8rem', fontWeight: 900, color: 'var(--color-text-light)', letterSpacing: '1.5px', textShadow: '0 2px 12px rgba(0,0,0,0.12)', fontFamily: 'Poppins, Inter, Arial, sans-serif', margin: 0 }}>
           Explore Our Trips
         </h1>
-        <p style={{ textAlign: 'center', color: '#fff', fontSize: '1.25rem', marginTop: '1rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif' }}>
+        <p style={{ textAlign: 'center', color: 'var(--color-text-light)', fontSize: '1.25rem', marginTop: '1rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif' }}>
           Find the perfect adventure for you, your partner, or your group.
         </p>
       </section>
@@ -39,10 +39,35 @@ const Trips: React.FC = () => {
         ))}
       </div>
 
+      {/* Solo Trip Section */}
+      <section style={{ width: '100%', padding: '50px 0', background: 'var(--color-primary)' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 2vw', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '2.1rem', fontWeight: 800, color: 'var(--color-secondary)', marginBottom: '1.5rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
+            Solo Trip
+          </h2>
+          <p style={{ color: 'var(--color-secondary)', fontSize: '1.15rem', marginBottom: '2.5rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto' }}>
+            Embark on a journey of self-discovery and adventure with our Solo Trip packages. Whether you're a seasoned solo traveler or taking your first independent trip, our curated experiences ensure safety, excitement, and opportunities to meet like-minded explorers. Enjoy flexible itineraries, handpicked accommodations, and the freedom to explore at your own pace. Step out of your comfort zone and create unforgettable memories—just for you.
+          </p>
+          <a href="/bookme?type=solo" style={{
+            display: 'inline-block',
+            background: 'linear-gradient(90deg, var(--color-secondary) 60%, var(--color-accent) 100%)',
+            color: 'var(--color-text-light)',
+            fontWeight: 700,
+            fontSize: '1.15rem',
+            borderRadius: 8,
+            padding: '14px 38px',
+            textDecoration: 'none',
+            boxShadow: '0 2px 8px rgba(30,34,45,0.08)',
+            letterSpacing: '1px',
+            transition: 'background 0.18s',
+          }}>Book a Solo Trip</a>
+        </div>
+      </section>
+
       {/* Featured Trips Section */}
-      <section style={{ width: '100%', padding: '60px 0', background: '#fff' }}>
+      <section style={{ width: '100%', padding: '60px 0', background: 'var(--color-text-light)' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2vw' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 800, color: '#1a237e', marginBottom: '3rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 800, color: 'var(--color-secondary)', marginBottom: '3rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
             Upcoming Group Trips
           </h2>
 

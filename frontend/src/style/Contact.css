@@ -106,8 +106,8 @@
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #2196f3, #1976d2);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-text-light);
   border: none;
   padding: 14px 28px;
   border-radius: 8px;
@@ -119,9 +119,9 @@
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, #1976d2, #1565c0);
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 6px 20px rgba(64, 224, 208, 0.3);
 }
 
 .submit-btn:disabled {
@@ -134,13 +134,13 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #1a237e;
+  color: var(--color-secondary);
   font-family: 'Poppins', 'Inter', Arial, sans-serif;
 }
 
 .contact-details > p {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-muted);
   margin-bottom: 3rem;
   font-family: 'Inter', Arial, sans-serif;
 }
@@ -157,7 +157,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: white;
+  background: var(--color-text-light);
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -175,21 +175,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ff7043, #ff5722);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
   border-radius: 50%;
-  color: white;
+  color: var(--color-text-light);
 }
 
 .contact-text h3 {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #1a237e;
+  color: var(--color-secondary);
   font-family: 'Poppins', 'Inter', Arial, sans-serif;
 }
 
 .contact-text p {
-  color: #666;
+  color: var(--color-text-muted);
   margin: 0.2rem 0;
   font-family: 'Inter', Arial, sans-serif;
 }
@@ -198,7 +198,7 @@
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #1a237e;
+  color: var(--color-secondary);
   font-family: 'Poppins', 'Inter', Arial, sans-serif;
 }
 

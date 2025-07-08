@@ -3,7 +3,7 @@ import '../style/About.css';
 
 const About: React.FC = () => {
   return (
-    <div className="about-page">
+    <div className="about-page" style={{ fontFamily: "'Merriweather', 'Playfair Display', 'Poppins', Arial, serif" }}>
       {/* Hero Section */}
       <section className="about-hero">
         <div className="hero-content">

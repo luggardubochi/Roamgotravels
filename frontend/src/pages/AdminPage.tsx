@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BACKEND_API } from '../components/config';
+import AdminDetailsModal from '../components/AdminDetailsModal';
 
 interface User {
   id: string;
@@ -94,6 +95,9 @@ const AdminPage: React.FC = () => {
   const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<'user'|'trip'|'visa'|'contact'|null>(null);
+  const [modalData, setModalData] = useState<any>(null);
   console.log(contactSubmissions);
   // Mock data for visa applications and contact submissions
   const mockVisaApplications: VisaApplication[] = [
@@ -399,7 +403,7 @@ const AdminPage: React.FC = () => {
   );
 
   return (
-    <div style={{ padding: '40px', background: '#f8f9fa', minHeight: '100vh' }}>
+    <div style={{ fontFamily: "'Roboto', 'Open Sans', Arial, sans-serif" }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <h1 style={{
           fontSize: '2.5rem',
@@ -465,7 +469,7 @@ const AdminPage: React.FC = () => {
                 </thead>
                 <tbody>
                   {users.map(user => (
-                    <tr key={user.id}>
+                    <tr key={user.id} onClick={() => { setModalOpen(true); setModalType('user'); setModalData(user); }} style={{ cursor: 'pointer' }}>
                       <td style={tdStyle}>{`${user.first_name} ${user.last_name}`}</td>
                       <td style={tdStyle}>{user.email}</td>
                       <td style={tdStyle}>
@@ -481,7 +485,7 @@ const AdminPage: React.FC = () => {
                       <td style={tdStyle}>
                         <button
                           style={{ ...actionButtonStyle, background: '#f44336', color: '#fff' }}
-                          onClick={() => deleteItem('user', user.id)}
+                          onClick={(e) => { e.stopPropagation(); deleteItem('user', user.id); }}
                         >
                           Delete
                         </button>
@@ -512,7 +516,7 @@ const AdminPage: React.FC = () => {
                 </thead>
                 <tbody>
                   {tripApplications.map(app => (
-                    <tr key={app.id}>
+                    <tr key={app.id} onClick={() => { setModalOpen(true); setModalType('trip'); setModalData(app); }} style={{ cursor: 'pointer' }}>
                       <td style={tdStyle}>{app.personalinfo.fullname}</td>
                       <td style={tdStyle}>
                         <div>{app.personalinfo.email}</div>
@@ -545,7 +549,7 @@ const AdminPage: React.FC = () => {
                         </select>
                         <button
                           style={{ ...actionButtonStyle, background: '#f44336', color: '#fff' }}
-                          onClick={() => deleteItem('trip', app.id)}
+                          onClick={(e) => { e.stopPropagation(); deleteItem('trip', app.id); }}
                         >
                           Delete
                         </button>
@@ -576,7 +580,7 @@ const AdminPage: React.FC = () => {
                 </thead>
                 <tbody>
                   {visaApplications.map(app => (
-                    <tr key={app.id}>
+                    <tr key={app.id} onClick={() => { setModalOpen(true); setModalType('visa'); setModalData(app); }} style={{ cursor: 'pointer' }}>
                       <td style={tdStyle}>{app.personalInfo.fullName}</td>
                       <td style={tdStyle}>
                         <div>{app.contactInfo.email}</div>
@@ -605,7 +609,7 @@ const AdminPage: React.FC = () => {
                         </select>
                         <button
                           style={{ ...actionButtonStyle, background: '#f44336', color: '#fff' }}
-                          onClick={() => deleteItem('visa', app.id)}
+                          onClick={(e) => { e.stopPropagation(); deleteItem('visa', app.id); }}
                         >
                           Delete
                         </button>
@@ -626,7 +630,7 @@ const AdminPage: React.FC = () => {
                   <tr>
                     <th style={thStyle}>Name</th>
                     <th style={thStyle}>Email</th>
-                    <th style={thStyle}>Subject</th>
+                    <th style={thStyle}>Subject</th> 
                     <th style={thStyle}>Message</th>
                     <th style={thStyle}>Status</th>
                     <th style={thStyle}>Submitted</th>
@@ -635,8 +639,8 @@ const AdminPage: React.FC = () => {
                 </thead>
                 <tbody>
                   {contactSubmissions.map(sub => (
-                    <tr key={sub.id}>
-                      <td style={tdStyle}>{sub.fullname}</td>
+                    <tr key={sub.id} onClick={() => { setModalOpen(true); setModalType('contact'); setModalData(sub); }} style={{ cursor: 'pointer' }}>
+                      <td style={tdStyle}>{sub.name}</td>
                       <td style={tdStyle}>{sub.email}</td>
                       <td style={tdStyle}>{sub.subject}</td>
                       <td style={tdStyle}>
@@ -647,7 +651,7 @@ const AdminPage: React.FC = () => {
                       <td style={tdStyle}>
                         <span style={statusBadgeStyle(sub.status)}>{sub.status}</span>
                       </td>
-                      <td style={tdStyle}>{formatDate(sub.submittedat)}</td>
+                      <td style={tdStyle}>{sub.submittedAt}</td>
                       <td style={tdStyle}>
                         <select
                           value={sub.status}
@@ -661,7 +665,7 @@ const AdminPage: React.FC = () => {
                         </select>
                         <button
                           style={{ ...actionButtonStyle, background: '#f44336', color: '#fff' }}
-                          onClick={() => deleteItem('contact', sub.id)}
+                          onClick={(e) => { e.stopPropagation(); deleteItem('contact', sub.id); }}
                         >
                           Delete
                         </button>
@@ -674,6 +678,71 @@ const AdminPage: React.FC = () => {
           )}
         </div>
       </div>
+      <AdminDetailsModal
+        open={modalOpen}
+        type={modalType as any}
+        data={modalData}
+        onClose={() => setModalOpen(false)}
+        actions={modalType && modalData ? (
+          modalType === 'user' ? (
+            <button
+              style={{ padding: '8px 18px', background: '#f44336', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
+              onClick={() => { deleteItem('user', modalData.id); }}
+            >Delete</button>
+          ) : modalType === 'trip' ? (
+            <>
+              <select
+                value={modalData.status}
+                onChange={e => updateStatus('trip', modalData.id, e.target.value)}
+                style={{ padding: '8px 12px', borderRadius: 6, border: '1px solid #2196f3', fontWeight: 600, color: '#1976d2', marginRight: 10 }}
+              >
+                <option value="pending">Pending</option>
+                <option value="reviewed">Reviewed</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              <button
+                style={{ padding: '8px 18px', background: '#f44336', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
+                onClick={() => { deleteItem('trip', modalData.id); }}
+              >Delete</button>
+            </>
+          ) : modalType === 'visa' ? (
+            <>
+              <select
+                value={modalData.status}
+                onChange={e => updateStatus('visa', modalData.id, e.target.value)}
+                style={{ padding: '8px 12px', borderRadius: 6, border: '1px solid #43a047', fontWeight: 600, color: '#43a047', marginRight: 10 }}
+              >
+                <option value="pending">Pending</option>
+                <option value="under_review">Under Review</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              <button
+                style={{ padding: '8px 18px', background: '#f44336', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
+                onClick={() => { deleteItem('visa', modalData.id); }}
+              >Delete</button>
+            </>
+          ) : modalType === 'contact' ? (
+            <>
+              <select
+                value={modalData.status}
+                onChange={e => updateStatus('contact', modalData.id, e.target.value)}
+                style={{ padding: '8px 12px', borderRadius: 6, border: '1px solid #9c27b0', fontWeight: 600, color: '#9c27b0', marginRight: 10 }}
+              >
+                <option value="new">New</option>
+                <option value="read">Read</option>
+                <option value="replied">Replied</option>
+                <option value="resolved">Resolved</option>
+              </select>
+              <button
+                style={{ padding: '8px 18px', background: '#f44336', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
+                onClick={() => { deleteItem('contact', modalData.id); }}
+              >Delete</button>
+            </>
+          ) : null
+        ) : null}
+      />
     </div>
   );
 };

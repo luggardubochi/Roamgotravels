@@ -60,13 +60,13 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f7f9fc' }}>
+    <div style={{ fontFamily: "'Quicksand', 'Inter', Arial, sans-serif", minHeight: '100vh', background: 'var(--color-neutral)' }}>
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, #ff7043 0%, #ff5722 100%)',
+        background: 'linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%)',
         padding: '80px 0 60px 0',
         textAlign: 'center',
-        color: 'white'
+        color: 'var(--color-secondary)'
       }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 2rem' }}>
           <h1 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '1rem' }}>
@@ -83,14 +83,14 @@ const Contact: React.FC = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', padding: '0 2rem' }}>
 
           {/* Contact Form */}
-          <div style={{ background: 'white', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', color: '#1a237e' }}>
+          <div style={{ background: 'var(--color-neutral)', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', color: 'var(--color-secondary)' }}>
               Send us a Message
             </h2>
 
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#333' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--color-secondary)' }}>
                   Full Name *
                 </label>
                 <input
@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '2px solid #e0e0e0',
+                    border: '2px solid var(--color-border)',
                     borderRadius: '8px',
                     fontSize: '1rem'
                   }}
@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#333' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--color-secondary)' }}>
                   Email Address *
                 </label>
                 <input
@@ -119,7 +119,7 @@ const Contact: React.FC = () => {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '2px solid #e0e0e0',
+                    border: '2px solid var(--color-border)',
                     borderRadius: '8px',
                     fontSize: '1rem'
                   }}
@@ -130,7 +130,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#333' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--color-secondary)' }}>
                   Phone Number
                 </label>
                 <input
@@ -138,7 +138,7 @@ const Contact: React.FC = () => {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '2px solid #e0e0e0',
+                    border: '2px solid var(--color-border)',
                     borderRadius: '8px',
                     fontSize: '1rem'
                   }}
@@ -149,7 +149,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#333' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--color-secondary)' }}>
                   Subject *
                 </label>
                 <select
@@ -157,7 +157,7 @@ const Contact: React.FC = () => {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '2px solid #e0e0e0',
+                    border: '2px solid var(--color-border)',
                     borderRadius: '8px',
                     fontSize: '1rem'
                   }}
@@ -173,7 +173,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div style={{ marginBottom: '2rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#333' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--color-secondary)' }}>
                   Message *
                 </label>
                 <textarea
@@ -182,7 +182,7 @@ const Contact: React.FC = () => {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    border: '2px solid #e0e0e0',
+                    border: '2px solid var(--color-border)',
                     borderRadius: '8px',
                     fontSize: '1rem',
                     resize: 'vertical'
@@ -196,8 +196,8 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 style={{
-                  background: 'linear-gradient(135deg, #2196f3, #1976d2)',
-                  color: 'white',
+                  background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
+                  color: 'var(--color-secondary)',
                   border: 'none',
                   padding: '14px 28px',
                   borderRadius: '8px',
@@ -214,10 +214,10 @@ const Contact: React.FC = () => {
 
           {/* Contact Information */}
           <div>
-            <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', color: '#1a237e' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', color: 'var(--color-secondary)' }}>
               Get in Touch
             </h2>
-            <p style={{ fontSize: '1.1rem', color: '#666', marginBottom: '3rem' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-secondary)', marginBottom: '3rem' }}>
               We're here to help you plan the perfect trip. Reach out to us through any of these channels:
             </p>
 
@@ -226,8 +226,8 @@ const Contact: React.FC = () => {
                 <div style={{ fontSize: '2rem' }}>📧</div>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.5rem' }}>Email Us</h3>
-                  <p style={{ color: '#666' }}>info@roamgotravels.com</p>
-                  <p style={{ color: '#666' }}>support@roamgotravels.com</p>
+                  <p style={{ color: 'var(--color-secondary)' }}>info@roamgotravels.com</p>
+                  <p style={{ color: 'var(--color-secondary)' }}>support@roamgotravels.com</p>
                 </div>
               </div>
 
@@ -235,8 +235,8 @@ const Contact: React.FC = () => {
                 <div style={{ fontSize: '2rem' }}>📞</div>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.5rem' }}>Call Us</h3>
-                  <p style={{ color: '#666' }}>+44 7407 628596</p>
-                  <p style={{ color: '#666' }}>Mon-Fri: 9AM-6PM EST</p>
+                  <p style={{ color: 'var(--color-secondary)' }}>+44 7407 628596</p>
+                  <p style={{ color: 'var(--color-secondary)' }}>Mon-Fri: 9AM-6PM EST</p>
                 </div>
               </div>
 
@@ -244,8 +244,8 @@ const Contact: React.FC = () => {
                 <div style={{ fontSize: '2rem' }}>📍</div>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.5rem' }}>Visit Us</h3>
-                  <p style={{ color: '#666' }}>Brooklyn Bridge, </p>
-                  <p style={{ color: '#666' }}>United Kingdom</p>
+                  <p style={{ color: 'var(--color-secondary)' }}>Brooklyn Bridge, </p>
+                  <p style={{ color: 'var(--color-secondary)' }}>United Kingdom</p>
                 </div>
               </div>
 
@@ -253,8 +253,8 @@ const Contact: React.FC = () => {
                 <div style={{ fontSize: '2rem' }}>💬</div>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.5rem' }}>Live Chat</h3>
-                  <p style={{ color: '#666' }}>Available 24/7</p>
-                  <p style={{ color: '#666' }}>Click the chat icon below</p>
+                  <p style={{ color: 'var(--color-secondary)' }}>Available 24/7</p>
+                  <p style={{ color: 'var(--color-secondary)' }}>Click the chat icon below</p>
                 </div>
               </div>
             </div>
@@ -262,13 +262,13 @@ const Contact: React.FC = () => {
             <div style={{ marginTop: '3rem' }}>
               <h3 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '1rem' }}>Follow Us</h3>
               <div style={{ display: 'flex', gap: '1rem' }}>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', background: '#1877f2', color: 'white', borderRadius: '8px', textDecoration: 'none' }}>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', background: 'var(--color-accent)', color: 'var(--color-text-light)', borderRadius: '8px', textDecoration: 'none' }}>
                   📘 Facebook
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', background: '#e4405f', color: 'white', borderRadius: '8px', textDecoration: 'none' }}>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', background: 'var(--color-accent)', color: 'var(--color-text-light)', borderRadius: '8px', textDecoration: 'none' }}>
                   📸 Instagram
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', background: '#1da1f2', color: 'white', borderRadius: '8px', textDecoration: 'none' }}>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ padding: '10px 15px', background: 'var(--color-accent)', color: 'var(--color-text-light)', borderRadius: '8px', textDecoration: 'none' }}>
                   🐦 Twitter
                 </a>
               </div>

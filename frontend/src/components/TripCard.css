@@ -2,7 +2,7 @@
   display: flex;
   max-width: 1200px;
   margin: 2rem auto;
-  background: #fff;
+  background: var(--color-text-light);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -39,13 +39,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  background: linear-gradient(135deg, var(--color-neutral) 0%, var(--color-text-light) 100%);
 }
 
 .trip-title {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #1a237e;
+  color: var(--color-secondary);
   margin: 0 0 1rem 0;
   letter-spacing: 0.5px;
   line-height: 1.2;
@@ -53,7 +53,7 @@
 
 .trip-description {
   font-size: 1.1rem;
-  color: #555;
+  color: var(--color-text-muted);
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
   font-weight: 400;
@@ -67,23 +67,23 @@
 }
 
 .trip-price {
-  background: linear-gradient(135deg, #ff7043, #ff5722);
-  color: white;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+  color: var(--color-text-light);
   padding: 0.5rem 1rem;
   border-radius: 25px;
   font-weight: 700;
   font-size: 1.1rem;
-  box-shadow: 0 4px 12px rgba(255, 112, 67, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3);
 }
 
 .trip-duration {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: var(--color-primary);
+  color: var(--color-secondary);
   padding: 0.5rem 1rem;
   border-radius: 25px;
   font-weight: 600;
   font-size: 0.95rem;
-  border: 2px solid #bbdefb;
+  border: 2px solid var(--color-neutral);
 }
 
 .trip-bullet-points {
@@ -97,13 +97,13 @@
   align-items: flex-start;
   margin-bottom: 0.8rem;
   font-size: 1rem;
-  color: #333;
+  color: var(--color-text-main);
   line-height: 1.5;
 }
 
 .bullet-icon {
-  background: #4caf50;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-light);
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -118,8 +118,8 @@
 }
 
 .book-me-btn {
-  background: linear-gradient(135deg, #2196f3, #1976d2);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-text-light);
   border: none;
   padding: 1rem 2rem;
   border-radius: 50px;
@@ -127,16 +127,16 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 4px 15px rgba(64, 224, 208, 0.3);
   text-transform: uppercase;
   letter-spacing: 1px;
   align-self: flex-start;
 }
 
 .book-me-btn:hover {
-  background: linear-gradient(135deg, #1976d2, #1565c0);
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+  box-shadow: 0 6px 20px rgba(64, 224, 208, 0.4);
 }
 
 .book-me-btn:active {

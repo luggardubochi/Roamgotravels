@@ -1,38 +1,42 @@
 export const GroupTripInfo = [
-    {
-        id: "7bb761f9-bf00-43d8-8bea-633f2c8fa215",
-        reverse: false,
-        imagesrc: "src/assets/IMG-20250620-WA0065.jpg",
-        title: "Morocco Adventure 20th - 23rd of June",
-        description: "Experience the magic of Morocco with our curated adventure package. Explore ancient medinas, ride camels in the Sahara, and immerse yourself in rich culture.",
-        bulletpoints: [
-            "Return flight tickets",
-            "Airport transfer",
-            "3 nights stay at a 4 star hotel",
-            "Daily breakfast",
-            "Sahara desert tour",
-            "Traditional Moroccan dinner"
-        ],
-        price: "€600 per person",
-        duration: "4 Days"
-    },
-    {
-        id: "2c5d7d9b-6b72-4cca-8ffb-55ce6c59bcac",
-        reverse: true,
-        imagesrc: "src/assets/15+Places+You+Must+Visit+in+Albania1.jpg",
-        title: "Albania Discovery 23rd - 26th of May",
-        description: "Discover the hidden gem of Albania with pristine beaches, ancient ruins, and stunning mountain landscapes.",
-        bulletpoints: [
-            "Return flight tickets",
-            "Airport transfer",
-            "3 nights stay at a 4 star hotel",
-            "Daily breakfast",
-            "Coastal boat tour",
-            "Historical city tour"
-        ],
-        price: "€600 per person",
-        duration: "4 Days"
-    },
+    // {
+    //     id: "7bb761f9-bf00-43d8-8bea-633f2c8fa215",
+    //     reverse: false,
+    //     imagesrc: "src/assets/IMG-20250620-WA0065.jpg",
+    //     title: "Morocco Adventure 20th - 23rd of June",
+    //     description: "Experience the magic of Morocco with our curated adventure package. Explore ancient medinas, ride camels in the Sahara, and immerse yourself in rich culture.",
+    //     bulletpoints: [
+    //         "Return flight tickets",
+    //         "Airport transfer",
+    //         "3 nights stay at a 4 star hotel",
+    //         "Daily breakfast",
+    //         "Sahara desert tour",
+    //         "Traditional Moroccan dinner"
+    //     ],
+    //     price: "€600 per person",
+    //     duration: "4 Days",
+    //     startdate: "",
+    //     enddate: "",
+    // },
+    // {
+    //     id: "2c5d7d9b-6b72-4cca-8ffb-55ce6c59bcac",
+    //     reverse: true,
+    //     imagesrc: "src/assets/15+Places+You+Must+Visit+in+Albania1.jpg",
+    //     title: "Albania Discovery 23rd - 26th of May",
+    //     description: "Discover the hidden gem of Albania with pristine beaches, ancient ruins, and stunning mountain landscapes.",
+    //     bulletpoints: [
+    //         "Return flight tickets",
+    //         "Airport transfer",
+    //         "3 nights stay at a 4 star hotel",
+    //         "Daily breakfast",
+    //         "Coastal boat tour",
+    //         "Historical city tour"
+    //     ],
+    //     price: "€600 per person",
+    //     duration: "4 Days",
+    //     startdate: "",
+    //     enddate: "",
+    // },
     {
         id: "13b56685-df05-43fb-9882-e579dafb4873",
         reverse: false,
@@ -48,7 +52,9 @@ export const GroupTripInfo = [
             "Thai cooking class"
         ],
         price: "€1300 per person",
-        duration: "6 Days"
+        duration: "6 Days",
+        startdate: "",
+        enddate: "",
     },
     {
         id: "4d7bc921-0d66-4437-b6f0-06eee714d7e7",
@@ -65,7 +71,9 @@ export const GroupTripInfo = [
             "Sunset dinner experience"
         ],
         price: "€800 per person",
-        duration: "4 Days"
+        duration: "4 Days",
+        startdate: "",
+        enddate: "",
     },
     {
         id: "80b6bcf2-260f-4d91-ac34-a54d8e1971e3",
@@ -82,7 +90,9 @@ export const GroupTripInfo = [
             "Swiss chocolate tasting"
         ],
         price: "€850",
-        duration: "4 Days"
+        duration: "4 Days",
+        startdate: "",
+        enddate: "",
     },
     {
         id: "e03acafb-81da-4915-8e0e-d2b9921d4c04",
@@ -99,6 +109,8 @@ export const GroupTripInfo = [
             "Paint and sip by the beach"
         ],
         price: "€600 per person",
-        duration: "4 Days"
+        duration: "4 Days",
+        startdate: "",
+        enddate: "",
     }
 ]

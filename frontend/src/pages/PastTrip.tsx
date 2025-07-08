@@ -30,7 +30,7 @@ const PastTrip: React.FC = () => {
     console.log("Going to the next video");
   };
   return (
-    <div style={{ width: '100vw', background: '#f7f9fc', minHeight: '100vh', paddingBottom: '40px' }}>
+    <div style={{ fontFamily: "'Cormorant Garamond', 'Lora', 'Poppins', Arial, serif", width: '100vw', background: '#f7f9fc', minHeight: '100vh', paddingBottom: '40px' }}>
       <section style={{ width: '100%', padding: '60px 0 30px 0', background: 'linear-gradient(90deg, #ff7043 0%, #fff3e0 100%)' }}>
         <h1 style={{ textAlign: 'center', fontSize: '2.8rem', fontWeight: 900, color: '#fff', letterSpacing: '1.5px', textShadow: '0 2px 12px rgba(0,0,0,0.12)', fontFamily: 'Poppins, Inter, Arial, sans-serif', margin: 0 }}>
           Past Trips

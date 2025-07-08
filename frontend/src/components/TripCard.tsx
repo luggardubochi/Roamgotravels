@@ -26,7 +26,7 @@ const TripCard: React.FC<TripCardProps> = ({
   const navigate = useNavigate();
   const handleBookMe = () => {
     const token = localStorage.getItem('token');
-    const targetUrl = `/bookme/${id}`;
+    const targetUrl = `/group/${id}`;
     if (!token) {
       navigate(`/login?redirect=${encodeURIComponent(targetUrl)}`);
     } else {

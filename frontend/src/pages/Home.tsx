@@ -20,7 +20,7 @@ const vacationPackages = [
 ];
 
 const Home = () => (
-  <>
+  <div style={{ fontFamily: "'Montserrat', 'Poppins', Arial, sans-serif" }}>
     <Carousel />
     <section style={{ width: '100vw', margin: '40px 0', padding: '0', background: '#fff' }}>
       <h2 style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '2.8rem', fontWeight: 900, color: '#1a237e', letterSpacing: '1px', textTransform: 'uppercase', textShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
@@ -85,6 +85,6 @@ const Home = () => (
         ))}
       </div>
     </section>
-  </>
+  </div>
 );
 export default Home; 
