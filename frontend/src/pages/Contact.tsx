@@ -81,7 +81,7 @@ const Contact: React.FC = () => {
 
       {/* Contact Content */}
       <section style={{ padding: '60px 0', maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', padding: '0 2rem' }}>
+        <div className="formsection">
 
           {/* Contact Form */}
           <div style={{ background: 'var(--color-neutral)', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}>
