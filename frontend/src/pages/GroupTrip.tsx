@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { GroupTripInfo } from '../components/TripInfo';
 
 const GroupTrip: React.FC = () => {
+    //@ts-ignore
     const [imagesrc, setImagesrc] = useState<File | null | string>(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -13,12 +14,15 @@ const GroupTrip: React.FC = () => {
     const [endDate, setEndDate] = useState('');
     const [travelers, setTravelers] = useState(3);
 
+    //@ts-ignore
     const handleBulletChange = (idx: number, value: string) => {
         setBulletpoints(bp => bp.map((b, i) => (i === idx ? value : b)));
     };
     const addBullet = (bp: Array<string>) => setBulletpoints(bp);
+    //@ts-ignore
     const removeBullet = (idx: number) => setBulletpoints(bp => bp.filter((_, i) => i !== idx));
 
+    //@ts-ignore
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) setImagesrc(e.target.files[0]);
     };

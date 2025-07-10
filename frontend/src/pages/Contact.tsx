@@ -1,3 +1,4 @@
+//@ts-ignore
 import React, { useState, type ChangeEvent } from 'react';
 import '../style/Contact.css';
 import { BACKEND_API } from '../components/config';

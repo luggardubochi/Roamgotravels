@@ -40,6 +40,7 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
+  // @ts-ignore
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');

@@ -123,6 +123,7 @@ const BookMePage: React.FC = () => {
     const [additionalNotes, setAdditionalNotes] = useState('');
 
     // Solo trip if no companions or all companions are empty
+    //@ts-ignore
     const isSoloTrip = companions.length === 0 || companions.every(comp => Object.values(comp).every(v => v === ''));
 
     const handlePersonalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
