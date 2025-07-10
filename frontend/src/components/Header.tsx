@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from './../assets/roamtravel_logo.png';
 import './Header.css';
 
 const Header: React.FC = () => {
@@ -21,7 +22,7 @@ const Header: React.FC = () => {
       <div className="header-container">
         <div className="header-logo">
           <Link to="/">
-            <img src="src/assets/roamtravel_logo.png" alt="Logo" className="logo" />
+            <img src={Logo} alt="Logo" className="logo" />
           </Link>
         </div>
         <nav className={`header-nav${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(false)}>

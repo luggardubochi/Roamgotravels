@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Carousel.css';
+import Image1 from './../assets/carousel_image_1.jpg';
+import Image2 from './../assets/carousel_image_2.jpg';
+import Image3 from './../assets/carousel_image_3.jpg';
+import Image4 from './../assets/carousel_image_4.jpg';
 
-const images = [
-  'src/assets/carousel_image_1.jpg',
-  'src/assets/carousel_image_2.jpg',
-  'src/assets/carousel_image_3.jpg',
-  'src/assets/carousel_image_4.jpg',
-];
+const images = [Image1, Image2, Image3, Image4];
 
 const Carousel: React.FC = () => {
   const [current, setCurrent] = useState(0);

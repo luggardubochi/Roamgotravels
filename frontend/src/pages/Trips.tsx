@@ -2,20 +2,23 @@ import React from 'react';
 import Card from '../components/Card';
 import TripCard from '../components/TripCard';
 import { GroupTripInfo } from '../components/TripInfo';
+import GroupImage1 from './../assets/cards/IMG-20250620-WA0046.jpg';
+import GroupImage2 from './../assets/cards/IMG-20250620-WA0050.jpg';
+import GroupImage3 from './../assets/cards/IMG-20250620-WA0054.jpg';
 
 const trips = [
   {
-    imageSrc: 'src/assets/cards/IMG-20250620-WA0046.jpg',
+    imageSrc: GroupImage1,
     title: "Single's Trip",
     details: 'Solo adventures for independent travelers. Discover new places and meet new friends!'
   },
   {
-    imageSrc: 'src/assets/cards/IMG-20250620-WA0050.jpg',
+    imageSrc: GroupImage2,
     title: 'Couples Trip',
     details: 'Romantic getaways for two. Enjoy curated experiences and beautiful destinations.'
   },
   {
-    imageSrc: 'src/assets/cards/IMG-20250620-WA0054.jpg',
+    imageSrc: GroupImage3,
     title: 'Group Trips',
     details: 'Travel with friends, family, or colleagues. Group discounts and fun activities.'
   },
@@ -72,16 +75,16 @@ const Trips: React.FC = () => {
           </h2>
 
           {GroupTripInfo.map((value) => (
-          <TripCard
-            id={value.id}
-            reverse={value.reverse}
-            imageSrc={value.imagesrc}
-            title={value.title}
-            description={value.description}
-            bulletPoints={value.bulletpoints}
-            price={value.price}
-            duration={value.duration}
-          />))}
+            <TripCard
+              id={value.id}
+              reverse={value.reverse}
+              imageSrc={value.imagesrc}
+              title={value.title}
+              description={value.description}
+              bulletPoints={value.bulletpoints}
+              price={value.price}
+              duration={value.duration}
+            />))}
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BACKEND_API } from '../components/config';
+import bgImage from "./../assets/IMG-20250620-WA0048.jpg";
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -45,7 +46,6 @@ const Signup = () => {
     }
   };
 
-  const bgImage = "src/assets/IMG-20250620-WA0048.jpg";
 
   return (
     <div

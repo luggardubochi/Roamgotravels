@@ -1,5 +1,7 @@
 import React from 'react';
 import '../style/About.css';
+import StoryImage from './../assets/IMG-20250620-WA0048.jpg';
+import StoryContentImage from "./../assets/IMG-20250625-WA0065.jpg";
 
 const About: React.FC = () => {
   return (
@@ -50,7 +52,7 @@ Whether you are a seasoned traveler or you finally mustered up the courage to ta
               </p>
             </div>
             <div className="story-image">
-              <img src="/src/assets/IMG-20250620-WA0048.jpg" alt="Our team exploring the world" />
+              <img src={StoryImage} alt="Our team exploring the world" />
             </div>
           </div>
         </div>
@@ -144,7 +146,7 @@ Whether you are a seasoned traveler or you finally mustered up the courage to ta
           <div className="container">
             <div className="story-content">
               <div className="story-image">
-                <img src="src/assets/IMG-20250625-WA0065.jpg" alt="Our team exploring the world" />
+                <img src={StoryContentImage} alt="Our team exploring the world" />
               </div>
               <div className="story-text">
                 <p>

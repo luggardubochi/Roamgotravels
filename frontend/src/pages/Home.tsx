@@ -1,19 +1,22 @@
 import Carousel from '../components/Carousel';
 import Card from '../components/Card';
+import ImageVacation1 from './../assets/cards/IMG-20250620-WA0046.jpg';
+import ImageVacation2 from './../assets/cards/IMG-20250620-WA0050.jpg';
+import ImageVacation3 from './../assets/cards/IMG-20250620-WA0054.jpg';
 
 const vacationPackages = [
   {
-    imageSrc: 'src/assets/cards/IMG-20250620-WA0046.jpg',
+    imageSrc: ImageVacation1,
     title: "Single's Trip",
     details: 'Perfect for solo travelers seeking adventure and self-discovery. Enjoy curated experiences, meet new friends, and explore at your own pace.'
   },
   {
-    imageSrc: 'src/assets/cards/IMG-20250620-WA0050.jpg',
+    imageSrc: ImageVacation2,
     title: 'Couples Trip',
     details: 'Romantic getaways for two. Enjoy private dinners, couples activities, and beautiful destinations designed for unforgettable memories.'
   },
   {
-    imageSrc: 'src/assets/cards/IMG-20250620-WA0054.jpg',
+    imageSrc: ImageVacation3,
     title: 'Group Trips',
     details: 'Travel with friends, family, or colleagues. Group discounts, guided tours, and fun activities for everyone to enjoy together.'
   },

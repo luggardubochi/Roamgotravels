@@ -1,21 +1,48 @@
 import React, { useState } from 'react';
+import TripImages1 from './../assets/IMG-20250620-WA0065.jpg';
+import TripImages2 from './../assets/IMG-20250620-WA0057.jpg';
+import TripImages3 from './../assets/IMG-20250620-WA0048.jpg';
+import TripImages4 from './../assets/15+Places+You+Must+Visit+in+Albania1.jpg';
+import TripImages5 from './../assets/65c27d6543bb77284ba42029.jpeg';
+import TripImages6 from './../assets/thailandnwbeachsplash.jpg';
+import TripImages7 from './../assets/jyoshankar_travelblogger_desertluxurycamp_morocco_merzouga_saharadesert_glamping_ergchebbi_2.jpg';
+import TripVideos1 from '/videos/VID-20250620-WA0077.mp4';
+import TripVideos2 from '/videos/VID-20250620-WA0080.mp4';
+import TripVideos3 from '/videos/VID-20250620-WA0081.mp4';
+
+
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth <= 600;
 
 const pastTripImages = [
-  'src/assets/IMG-20250620-WA0065.jpg',
-  'src/assets/IMG-20250620-WA0057.jpg',
-  'src/assets/IMG-20250620-WA0048.jpg',
-  'src/assets/15+Places+You+Must+Visit+in+Albania1.jpg',
-  'src/assets/65c27d6543bb77284ba42029.jpeg',
-  'src/assets/thailandnwbeachsplash.jpg',
-  'src/assets/jyoshankar_travelblogger_desertluxurycamp_morocco_merzouga_saharadesert_glamping_ergchebbi_2.jpg',
+  TripImages1,
+  TripImages2,
+  TripImages3,
+  TripImages4,
+  TripImages5,
+  TripImages6,
+  TripImages7,
 ];
 
 const pastTripVideos = [
-  { src: 'videos/VID-20250620-WA0077.mp4', poster: pastTripImages[0], title: 'Past Trip Video 1', description: 'Our unforgettable adventure in Morocco, featuring camel rides, desert nights, and vibrant markets.' },
-  { src: 'videos/VID-20250620-WA0080.mp4', poster: pastTripImages[1], title: 'Past Trip Video 2', description: 'A breathtaking journey through the Swiss Alps, with stunning mountain views and cozy village stays.' },
-  { src: 'videos/VID-20250620-WA0081.mp4', poster: pastTripImages[2], title: 'Past Trip Video 3', description: 'Exploring the beautiful beaches and rich culture of Thailand, from island hopping to local cuisine.' },
+  {
+    src: TripVideos1,
+    poster: pastTripImages[0],
+    title: 'Past Trip Video 1',
+    description: 'Our unforgettable adventure in Morocco, featuring camel rides, desert nights, and vibrant markets.'
+  },
+  {
+    src: TripVideos2,
+    poster: pastTripImages[1],
+    title: 'Past Trip Video 2',
+    description: 'A breathtaking journey through the Swiss Alps, with stunning mountain views and cozy village stays.'
+  },
+  {
+    src: TripVideos3,
+    poster: pastTripImages[2],
+    title: 'Past Trip Video 3',
+    description: 'Exploring the beautiful beaches and rich culture of Thailand, from island hopping to local cuisine.'
+  },
 ];
 
 const PastTrip: React.FC = () => {

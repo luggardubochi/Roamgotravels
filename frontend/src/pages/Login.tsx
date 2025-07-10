@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BACKEND_API } from '../components/config';
+import bgImage from "./../assets/cards/IMG-20250620-WA0046.jpg";
 
-const bgImage = "src/assets/cards/IMG-20250620-WA0046.jpg";
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
