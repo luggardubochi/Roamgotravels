@@ -46,16 +46,16 @@ export class Booking {
   @Column('decimal', { precision: 10, scale: 2 })
   price!: number;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date'})//, default: ()=> "CURRENT_TIMESTAMP" })
   startDate!: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date'})//,default: ()=> "CURRENT_TIMESTAMP",})
   endDate!: string;
 
   @Column({
     type: 'enum',
     enum: BookingType,
-    default: BookingType.SINGLE,
+    default: BookingType.GROUP,
   })
   bookingType!: BookingType;
 
