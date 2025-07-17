@@ -17,22 +17,14 @@ const Carousel: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // const prevSlide = () => {
-  //   setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  // };
-
-  // const nextSlide = () => {
-  //   setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  // };
-
   return (
     <div className="carousel">
       <img src={images[current]} alt={`Slide ${current + 1}`} className="carousel-image" />
       {/* <button className="carousel-btn left" onClick={prevSlide}>&lt;</button> */}
       {/* <button className="carousel-btn right" onClick={nextSlide}>&gt;</button> */}
-      <div className="carousel-message">
+      {/* <div className="carousel-message">
         <h2>Let's roam the world together</h2>
-      </div>
+      </div> */}
     </div>
   );
 };
