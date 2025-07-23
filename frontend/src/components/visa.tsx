@@ -140,6 +140,10 @@ export const SchengenVisaForm: React.FC = () => {
                     <input name="passportExpiryDate" type="date" value={form.passportExpiryDate} onChange={handleChange} style={inputS} required />
                 </div>
                 <div style={{ flex: 1, minWidth: 160 }}>
+                    <label style={labelStyle}>Passport Image</label>
+                    <input name="passportPlaceOfIssue" value={form.passportPlaceOfIssue} onChange={handleChange} style={inputS} required type='file'/>
+                </div>
+                <div style={{ flex: 1, minWidth: 160 }}>
                     <label style={labelStyle}>Place of Issue</label>
                     <input name="passportPlaceOfIssue" value={form.passportPlaceOfIssue} onChange={handleChange} style={inputS} required />
                 </div>
