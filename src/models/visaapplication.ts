@@ -1,4 +1,7 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import Joi, { ValidationOptions } from "joi";
+import { TripApplicationdb } from "./tripapplication";
+import { User } from "./user";
 
 export enum Status {
     pending = "Pending",
@@ -6,6 +9,38 @@ export enum Status {
     approved = "Approved",
     rejected = "Rejected"
 }
+
+
+export const personalSchema = Joi.object({
+    fullname: Joi.string().required(),
+    gender: Joi.string().required(),
+    dob: Joi.string().required(),
+    nationality: Joi.string().required(),
+    passportNumber: Joi.string().required(),
+    passport: Joi.string().required(),
+})
+
+
+export const contactSchema = Joi.object({
+    phone: Joi.string().required(),
+    email: Joi.string().email().required(),
+    address: Joi.string().required(),
+})
+
+export const travelSchema = Joi.object({
+    purpose: Joi.string().required(),
+    memberstate: Joi.string().required(),
+    arrivaldate: Joi.string().isoDate().required(),
+    departuredate: Joi.string().isoDate().required()
+})
+
+export const visaSchema = Joi.object({
+    personalInfo: personalSchema,
+    contactInfo: contactSchema,
+    travelInfo: travelSchema,
+    status: Joi.string().required(),
+    submitted: Joi.string().required(),
+})
 
 
 @Entity()
@@ -27,6 +62,9 @@ export class PersonalInfo {
 
     @Column("text")
     passportNumber!: string;
+
+    @Column("text")
+    passport!: string;
 }
 
 @Entity()
@@ -65,19 +103,28 @@ export class TravelInfo {
 
 @Entity()
 export class VisaApplicationdb {
+
     @PrimaryGeneratedColumn("uuid")
     id!: string;
 
+    @OneToOne(() => TripApplicationdb)
+    @JoinColumn({ name: "tripid", referencedColumnName: "id" })
+    tripId!: TripApplicationdb;
+
+    @OneToOne(() => User)
+    @JoinColumn({ name: "user_id" })
+    user!: User;
+
     @OneToOne(() => PersonalInfo)
-    @JoinColumn({ name: 'id' })
+    @JoinColumn({ name: 'personalid' })
     personalinfo!: PersonalInfo;
 
     @OneToOne(() => ContactInformation)
-    @JoinColumn({ name: "contactid", foreignKeyConstraintName: "FK_ba1890ece4224d72abc6fb6e85aa703e" })
+    @JoinColumn({ name: "contactid" })
     contactinfo!: ContactInformation;
 
     @OneToOne(() => TravelInfo)
-    @JoinColumn({ name: "id", foreignKeyConstraintName: "FK_02fde3d3e2af40bab4ae213e5a8f837e", })
+    @JoinColumn({ name: "travelid" })
     travelinfo!: TravelInfo;
 
     @Column({ type: 'enum', default: Status.pending, enum: Status })
