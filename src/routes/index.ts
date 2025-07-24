@@ -1,18 +1,16 @@
-import { Router, Request, Response } from 'express';
-import authController from '../controllers/authController';
+import { Router } from 'express';
 import { authenticateJWT, AuthRequest, requireRole } from '../middlewares/authMiddleware';
-import { AppDataSource } from '../config/database';
-import { User } from '../models/user';
-import * as userService from '../services/userService';
 import { signupSchema, loginSchema, updateProfileSchema, changePasswordSchema } from '../models/user';
 import { validate } from '../middlewares/validate';
-import * as userController from '../controllers/userController';
+import { MessageSchema } from '../models/message';
 import { sensitiveLimiter } from '../middlewares/rateLimit';
+import authController from '../controllers/authController';
+import * as userController from '../controllers/userController';
 import * as bookingController from '../controllers/bookingController';
 import * as userBooking from '../controllers/userBookingController';
 import * as tripController from '../controllers/tripcontroller';
 import * as messageController from '../controllers/messagecontroller';
-import { MessageSchema } from '../models/message';
+import * as visaController from '../controllers/visaController';
 
 const router = Router();
 
@@ -81,6 +79,24 @@ router.post("/contact/add", validate(MessageSchema), messageController.createMes
 router.get("/contact/all", authenticateJWT, requireRole("admin"), messageController.getallMessages);
 // @ts-ignore
 router.patch("/contact/update", authenticateJWT, requireRole("admin"), messageController.updateMessage);
+
+
+// @ts-ignore
+// Visa Application Section
+router.post("/visa/create", authenticateJWT, visaController.createVisa);
+router.get("/visa/admin", authenticateJWT, requireRole("admin"), visaController.getAllVisasAdmin);
+// @ts-ignore
+router.patch("/visa/update/:visaId", authenticateJWT, visaController.updateVisa);
+// @ts-ignore
+router.patch("/visa/status/:visaId", authenticateJWT, requireRole('admin'), visaController.updateVisaStatus);
+// @ts-ignore
+router.delete("/visa/delete/:visaId", authenticateJWT, visaController.deleteVisa);
+// @ts-ignore
+router.get("/visa/user", authenticateJWT, visaController.getVisa);
+// @ts-ignore
+router.get("/visa/user/:visaId", authenticateJWT, visaController.getSingleVisa);
+
+
 
 
 export default router; 
