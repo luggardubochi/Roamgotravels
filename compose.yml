@@ -2,10 +2,12 @@ version: '3.8'
 
 services:
   app:
-    build: .
-    container_name: roamgoweb
+    build: 
+      context: ./
+      target: production-backend
+    container_name: roamgowebbackend
     ports:
-      - "3000:3000"
+      - "5174:5174"
     environment:
       - DB_HOST=db
       - DB_USER=${MYSQL_USER}

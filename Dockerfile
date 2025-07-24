@@ -1,29 +1,17 @@
-# Stage 1: Build
 FROM node:24-alpine AS builder
 
-#  Set the working directory
+COPY . ./app
+
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
-COPY package*.json ./
 RUN npm install
-COPY * .
-# RUN npm run build
 
-# Stage 2: Run
-FROM node:24-alpine
-# FROM demisto/python3:3.12.11.3982393
+EXPOSE 5174
 
-# Set the working directory
-WORKDIR /app
+FROM builder as production-frontend
 
-# COPY --from=builder /app/dist ./dist
-# COPY package*.json ./
-COPY . /app
-RUN npm install 
+CMD ["npm", "start:frontend"] 
 
-# Expose the application port
-# EXPOSE 5000
+FROM builder as production-backend
 
-# Start the application
-CMD ["npm", "run", "start:backend"] 
+CMD ["npm", "start:backend"] 
