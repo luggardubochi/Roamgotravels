@@ -5,7 +5,6 @@ import swaggerUi from 'swagger-ui-express';
 import mainRouter from './routes';
 import { AppDataSource } from './config/database';
 import { specs } from './config/swagger';
-import listEndpoints from 'express-list-endpoints';
 
 dotenv.config();
 
@@ -32,12 +31,5 @@ AppDataSource.initialize()
   .catch((error) => {
     console.error('Error during Data Source initialization:', error);
   });
-
-const endpoints = listEndpoints(app);
-
-console.log('Registered Endpoints: ', endpoints);
-endpoints.forEach(endpoint => {
-  console.log(`${endpoint.methods.join(', ')} ${endpoint.path}`);
-});
 
 export default app; 
