@@ -42,7 +42,7 @@ export const SchengenVisaForm: React.FC = () => {
         refusedVisa: '', refusedVisaDetails: '', previousVisa: '', previousVisaDetails: '',
     });
     const [confirmed, setConfirmed] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
+    const [submitted, _setSubmitted] = useState(false);
 
 
     const allFieldsFilled = Object.entries(form).every(([k, v]) => {
