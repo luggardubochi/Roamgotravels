@@ -28,15 +28,15 @@ const Trips: React.FC = () => {
   return (
     <div style={{ fontFamily: "'Nunito', 'Lato', Arial, sans-serif", width: '100vw', background: 'var(--color-neutral)', minHeight: '100vh', paddingBottom: '40px' }}>
       <section style={{ width: '100%', padding: '60px 0 30px 0', background: 'linear-gradient(90deg, var(--color-accent) 0%, var(--color-neutral) 100%)' }}>
-        <h1 style={{ textAlign: 'center', fontSize: '2.8rem', fontWeight: 900, color: 'var(--color-text-light)', letterSpacing: '1.5px', textShadow: '0 2px 12px rgba(0,0,0,0.12)', fontFamily: 'Poppins, Inter, Arial, sans-serif', margin: 0 }}>
+        <h1 style={{ textAlign: 'center', fontSize: '2.8rem', fontWeight: 900, color: 'var(--color-text-light)', letterSpacing: '1.5px', textShadow: '0 2px 12px rgba(0,0,0,0.12)', fontFamily: 'PP Eiko Heavy', margin: 0 }}>
           Explore Our Trips
         </h1>
-        <p style={{ textAlign: 'center', color: 'var(--color-text-light)', fontSize: '1.25rem', marginTop: '1rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif' }}>
+        <p style={{ textAlign: 'center', color: 'var(--color-text-light)', fontSize: '1.5rem', marginTop: '1rem', fontWeight: 900, fontFamily: 'PP Eiko Medium', }}>
           Find the perfect adventure for you, your partner, or your group.
         </p>
       </section>
 
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '2.5rem 2vw 0 2vw', display: 'flex', flexWrap: 'wrap', gap: '2.5rem', justifyContent: 'center' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '2.5rem 2vw 0 2vw', display: 'flex', flexWrap: 'wrap', gap: '2.5rem', justifyContent: 'center', marginBottom: "50px" }}>
         {trips.map((trip, idx) => (
           <Card key={idx} imageSrc={trip.imageSrc} title={trip.title} details={trip.details} />
         ))}
@@ -44,11 +44,13 @@ const Trips: React.FC = () => {
 
       {/* Solo Trip Section */}
       <section style={{ width: '100%', padding: '50px 0', background: 'var(--color-primary)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 2vw', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2.1rem', fontWeight: 800, color: 'var(--color-secondary)', marginBottom: '1.5rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
+        <div style={{ maxWidth: 900, margin: '3px auto', padding: '0 2vw', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '2.1rem', fontWeight: 800, color: 'var(--color-secondary)', marginBottom: '1.5rem', letterSpacing: '1px', fontFamily: "PP Eiko Heavy" }}>
             Solo Trip
           </h2>
-          <p style={{ color: 'var(--color-secondary)', fontSize: '1.15rem', marginBottom: '2.5rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto' }}>
+          <p style={{
+            color: 'var(--color-secondary)', fontSize: '1.15rem', marginBottom: '2.5rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto', textShadow: "0px 0 0 currentColor, 0px 0 0 currentColor, 0 1px 0 currentColor, 0 0px 0 currentColor", wordSpacing: "5px"
+          }}>
             Embark on a journey of self-discovery and adventure with our Solo Trip packages. Whether you're a seasoned solo traveler or taking your first independent trip, our curated experiences ensure safety, excitement, and opportunities to meet like-minded explorers. Enjoy flexible itineraries, handpicked accommodations, and the freedom to explore at your own pace. Step out of your comfort zone and create unforgettable memories—just for you.
           </p>
           <a href="/bookme?type=solo" style={{
@@ -65,12 +67,12 @@ const Trips: React.FC = () => {
             transition: 'background 0.18s',
           }}>Book a Solo Trip</a>
         </div>
-      </section>
+      </section >
 
       {/* Featured Trips Section */}
-      <section style={{ width: '100%', padding: '60px 0', background: 'var(--color-text-light)' }}>
+      < section style={{ width: '100%', padding: '60px 0', background: 'var(--color-text-light)' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2vw' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 800, color: 'var(--color-secondary)', marginBottom: '3rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 100, color: 'var(--color-secondary)', marginBottom: '3rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif', fontStyle: 'italic' }}>
             Upcoming Group Trips
           </h2>
 
@@ -86,8 +88,8 @@ const Trips: React.FC = () => {
               duration={value.duration}
             />))}
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 };
 

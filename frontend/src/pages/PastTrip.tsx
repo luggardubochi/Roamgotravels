@@ -59,10 +59,15 @@ const PastTrip: React.FC = () => {
   return (
     <div style={{ fontFamily: "'Cormorant Garamond', 'Lora', 'Poppins', Arial, serif", width: '100vw', background: '#f7f9fc', minHeight: '100vh', paddingBottom: '40px' }}>
       <section style={{ width: '100%', padding: '60px 0 30px 0', background: 'linear-gradient(90deg, #ff7043 0%, #fff3e0 100%)' }}>
-        <h1 style={{ textAlign: 'center', fontSize: '2.8rem', fontWeight: 900, color: '#fff', letterSpacing: '1.5px', textShadow: '0 2px 12px rgba(0,0,0,0.12)', fontFamily: 'Poppins, Inter, Arial, sans-serif', margin: 0 }}>
+        <h1 style={{
+          textAlign: 'center', fontSize: '2.8rem', fontWeight: 900, color: '#fff', letterSpacing: '1.5px',
+          fontFamily: 'PP Eiko Heavy, Poppins, Inter, Arial, sans-serif',
+          margin: 0,
+          textShadow: '0 2px 12px rgba(0,0,0,0.12)',
+        }}>
           Past Trips
         </h1>
-        <p style={{ textAlign: 'center', color: '#fff', fontSize: '1.25rem', marginTop: '1rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif' }}>
+        <p style={{ textAlign: 'center', color: '#fff', fontSize: '1.25rem', marginTop: '1rem', fontWeight: 500, fontFamily: 'PP Eiko Medium, Inter, Arial, sans-serif' }}>
           Relive the memories from our amazing past adventures!
         </p>
       </section>
@@ -70,7 +75,7 @@ const PastTrip: React.FC = () => {
       {/* Video Section */}
       <section style={{ width: '100%', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', padding: '40px 0', background: '#fff' }}>
         <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: '0 2vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 800, color: '#1a237e', marginBottom: '2rem', letterSpacing: '1px', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2.4rem', fontWeight: 800, color: '#1a237e', marginBottom: '2rem', letterSpacing: '1px', textShadow: '0 2px 12px rgba(0,0,0,0.12)', fontFamily: 'PP Eiko Heavy', }}>
             Video Highlights
           </h2>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2rem', position: 'relative', minHeight: '62vh', minWidth: '80vw', width: '100%' }}>
@@ -198,7 +203,7 @@ const PastTrip: React.FC = () => {
             </button>
           </div>
           {/* Video Description Section removed for overlay */}
-          <p style={{ textAlign: 'center', marginTop: '2.5rem', color: '#333', fontSize: '1.1rem' }}>
+          <p style={{ textAlign: 'center', marginTop: '2.5rem', color: '#333', fontSize: '1.1rem',  fontFamily: 'PP Eiko Medium' }}>
             Watch the best moments from our previous trips, from breathtaking landscapes to unforgettable group activities.
           </p>
         </div>

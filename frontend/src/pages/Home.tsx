@@ -26,7 +26,17 @@ const Home = () => (
   <div style={{ fontFamily: "'Montserrat', 'Poppins', Arial, sans-serif" }}>
     <Carousel />
     <section style={{ width: '100vw', margin: '40px 0', padding: '0', background: '#fff' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '2.8rem', fontWeight: 900, color: '#1a237e', letterSpacing: '1px', textTransform: 'uppercase', textShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+      <h2 style={{
+        textAlign: 'center',
+        marginBottom: '2rem',
+        fontSize: '2.8rem',
+        fontWeight: 900,
+        color: '#1a237e',
+        letterSpacing: '5px',
+        // textShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        fontFamily: "PP Eiko Heavy",
+        fontStyle: "italic",
+      }}>
         Vacation Packages
       </h2>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center', width: '100%', maxWidth: '1600px', margin: '0 auto' }}>
@@ -36,7 +46,19 @@ const Home = () => (
       </div>
     </section>
     <section style={{ width: '100vw', background: '#f7f9fc', padding: '60px 0', margin: 0, fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
-      <h2 style={{ textAlign: 'center', fontSize: '2.6rem', fontWeight: 900, color: '#007bff', marginBottom: '2.5rem', letterSpacing: '1.5px', textTransform: 'uppercase', textShadow: '0 2px 8px rgba(0,0,0,0.08)', fontFamily: 'Poppins, Inter, Arial, sans-serif' }}>
+      <h2 style={{
+        textAlign: 'center',
+        fontSize: '2.6rem',
+        fontWeight: 900,
+        color: '#1a237e',
+        marginBottom: '2.5rem',
+        textTransform: 'uppercase',
+        textShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        letterSpacing: '5px',
+        // textShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        fontFamily: "PP Eiko Heavy",
+        fontStyle: "italic",
+      }}>
         How to Book a Session
       </h2>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto' }}>
@@ -78,10 +100,21 @@ const Home = () => (
             }}
           >
             <div style={{ fontSize: '3rem', marginBottom: 18, lineHeight: 1 }}>{step.emoji}</div>
-            <div style={{ fontWeight: 800, fontSize: '1.35rem', marginBottom: 12, color: '#1a237e', fontFamily: 'Poppins, Inter, Arial, sans-serif', letterSpacing: '0.5px', lineHeight: 1.2 }}>
+            <div style={{ fontWeight: 800, fontSize: '1.35rem', marginBottom: 12, color: '#1a237e',  letterSpacing: '0.5px', lineHeight: 1.2,
+        // textShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        fontFamily: "PP Eiko Medium",
+        fontStyle: "italic",
+             }}>
               {step.title}
             </div>
-            <div style={{ color: '#444', fontSize: '1.13rem', fontWeight: 500, fontFamily: 'Inter, Arial, sans-serif', lineHeight: 1.5, marginBottom: 0 }}>
+            <div style={{
+              color: '#444', fontSize: '1.13rem', fontWeight: 500, lineHeight: 1.5, marginBottom: 0,
+
+              letterSpacing: '1px',
+              textShadow: '0px 1px 0px',
+              fontFamily: "PP Eiko thin",
+              fontStyle: "italic",
+            }}>
               {step.desc}
             </div>
           </div>

@@ -13,9 +13,11 @@ const Footer: React.FC = () => (
     color: 'var(--color-text-light)',
     padding: '2.5rem 0 1.2rem 0',
     textAlign: 'center',
-    fontFamily: 'Poppins, Inter, Arial, sans-serif',
+    fontFamily: 'PP Eiko Thin, Poppins, Inter, Arial, sans-serif',
     borderTop: '3px solid var(--color-accent)',
-    background: 'linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%)'
+    background: 'linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%)',
+    fontWeight: "bolder",
+    textShadow: "0 0 0 currentColor, 0px 0 0 currentColor, 0 1px 0 currentColor, 0 0px 0 currentColor",
   }}>
     <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.2rem' }}>
       <div style={{ fontWeight: 700, fontSize: '1.3rem', letterSpacing: '1px', color: 'var(--color-text-light)' }}>Roamgo Travels</div>
@@ -37,7 +39,7 @@ const Footer: React.FC = () => (
         &copy; {currentYear} Roamgo Travels. All rights reserved.
       </div>
     </div>
-  </footer>
+  </footer >
 );
 
 export default Footer; 

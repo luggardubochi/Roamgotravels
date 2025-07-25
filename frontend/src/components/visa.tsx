@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BACKEND_API } from './config';
+import { useNavigate } from 'react-router-dom';
 
 const labelStyle = {
     display: 'block',
@@ -20,9 +22,10 @@ const inputStyle = {
 };
 
 export const SchengenVisaForm: React.FC = () => {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         // Personal Information
-        fullName: '', gender: '', dob: '', placeOfBirth: '', countryOfBirth: '', currentNationality: '', nationalityAtBirth: '', maritalStatus: '', nationalId: '', passportNumber: '', passportIssueDate: '', passportExpiryDate: '', passportPlaceOfIssue: '',
+        fullName: '', gender: '', dob: '', placeOfBirth: '', countryOfBirth: '', currentNationality: '', nationalityAtBirth: '', maritalStatus: '', nationalId: '', passportNumber: '', passportIssueDate: '', passportExpiryDate: '', passportPlaceOfIssue: '', passport: null,
         // Contact Information
         homeAddress: '', city: '', state: '', postalCode: '', country: '', phone: '', email: '',
         // Occupation and Employer
@@ -41,28 +44,93 @@ export const SchengenVisaForm: React.FC = () => {
     const [confirmed, setConfirmed] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
-    // Helper to check if all required fields are filled
+
     const allFieldsFilled = Object.entries(form).every(([k, v]) => {
-        // Only require sponsor fields if travelCostsBy is 'sponsor'
+
         if ((k === 'sponsorName' || k === 'sponsorRelationship' || k === 'sponsorInfo') && form.travelCostsBy !== 'sponsor') return true;
-        // Only require refusedVisaDetails if refusedVisa is 'yes'
+
         if (k === 'refusedVisaDetails' && form.refusedVisa !== 'yes') return true;
-        // Only require previousVisaDetails if previousVisa is 'yes'
+
         if (k === 'previousVisaDetails' && form.previousVisa !== 'yes') return true;
-        return v.trim() !== '';
+        if (v !== null) {
+            if (typeof v === 'string') {
+                return v.trim() !== '';
+            } else {
+                return v !== null;
+            }
+        }
+        return true;
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: any) => {
         const { name, value } = e.target;
-        setForm(f => ({ ...f, [name]: value }));
+        if (name === "passport") {
+            setForm((prev) => ({ ...prev, [name]: e.target.files[0] }));
+            console.log(e.target.files[0]);
+        } else {
+            setForm((prev) => ({ ...prev, [name]: value }));
+        }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
-        if (!allFieldsFilled || !confirmed) return;
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
+        if (!allFieldsFilled || !confirmed) {
+            alert('Please ensure all fields are filled and confirmed before submitting.');
+            return;
+        }
+
+        if (!form.passport) {
+            alert('Please select a passport image to upload.');
+            return;
+        }
+
+
+        const formDataToSend = new FormData();
+
+
+        for (const key in form) {
+            if (key !== 'passport') {
+                //@ts-ignore
+                if (form[key] !== null && form[key] !== undefined) {
+                    //@ts-ignore
+                    formDataToSend.append(key, String(form[key]));
+                }
+            }
+        }
+
+        formDataToSend.append('passport', form.passport);
+
         alert('Visa application data collected!');
-        // Here you would send the data to backend
+
+        try {
+            let res = await fetch(`${BACKEND_API}/api/visa/create`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formDataToSend,
+            });
+
+            console.log(formDataToSend);
+
+            if (res.ok) {
+                alert("Visa application submitted successfully!");
+                return navigate("/profile");
+            } else {
+                const errorData = await res.json();
+                alert(`Unable to update profile: ${errorData.message || res.statusText}`);
+            }
+        } catch (error) {
+            console.error("Error during form submission:", error);
+            alert("An unexpected error occurred during submission. Please try again.");
+        }
     };
 
     const inputS = { ...inputStyle, marginBottom: 10 };
@@ -141,7 +209,7 @@ export const SchengenVisaForm: React.FC = () => {
                 </div>
                 <div style={{ flex: 1, minWidth: 160 }}>
                     <label style={labelStyle}>Passport Image</label>
-                    <input name="passportPlaceOfIssue" value={form.passportPlaceOfIssue} onChange={handleChange} style={inputS} required type='file'/>
+                    <input name="passport" accept="image/*" onChange={handleChange} style={inputS} required type='file' />
                 </div>
                 <div style={{ flex: 1, minWidth: 160 }}>
                     <label style={labelStyle}>Place of Issue</label>

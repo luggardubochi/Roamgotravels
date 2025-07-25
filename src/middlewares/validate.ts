@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
 import path from 'path';
 // @ts-ignore
-import { v2 as cloudinary } from 'cloudinary';
+import cloudinary from '../config/cloudinary';
 // @ts-ignore
 import multer from 'multer';
 // @ts-ignore
@@ -15,10 +15,10 @@ export const validate = (schema: Joi.ObjectSchema) => (req: Request, res: Respon
     return;
   }
   next();
-}; 
+};
 
 
-const upload = multer({
+export const upload = multer({
   storage: multer.memoryStorage(),
   fileFilter: (req: Request, file: any, cb: any) => {
     const ext = path.extname(file.originalname).toLowerCase();
@@ -33,7 +33,7 @@ const upload = multer({
 
 export async function uploadToCloudinary(buffer: Buffer): Promise<string> {
   return new Promise((resolve, reject) => {
-    const stream = cloudinary.uploader.upload_stream({ folder: 'roamgotravels/bookings' }, (err: any, result: any) => {
+    const stream = cloudinary.uploader.upload_stream({ folder: 'roamgotravels/visa', type: "private" }, (err: any, result: any) => {
       if (err || !result) return reject(err);
       resolve(result.secure_url);
     });

@@ -13,6 +13,9 @@ export const getAllVisasAdmin = async (req: Request, res: Response) => {
 }
 
 export const createVisa = async (req: AuthRequest, res: Response) => {
+    console.log("Creating new visa");
+    const tripId = req.params.tripId;
+    console.log(req.body, req.file, tripId);
     let imageUrl = req.body.passport;
     if (req.file) {
         try {
@@ -21,14 +24,13 @@ export const createVisa = async (req: AuthRequest, res: Response) => {
             return res.status(500).json({ message: 'Image upload failed' });
         }
     }
-    const visaData = {...req.body, passport: imageUrl};
-    const tripId = req.params.tripId;
+    const visaData = { ...req.body, passport: imageUrl };
     const userId = req.user.id;
     try {
         const visa = await visaService.createVisaApplication(tripId, userId, visaData);
-        return res.json({data: visa});
-    } catch(err) {
-        return res.status(400).json({message: err});
+        return res.json({ data: visa });
+    } catch (err) {
+        return res.status(400).json({ message: err });
     }
 }
 
@@ -42,14 +44,14 @@ export const updateVisa = async (req: AuthRequest, res: Response) => {
             return res.status(500).json({ message: 'Image upload failed' });
         }
     }
-    const visaData = {...req.body, passport: imageUrl};
+    const visaData = { ...req.body, passport: imageUrl };
     const visaId = req.params.visaId;
     const userId = req.user.id;
     try {
         const visa = await visaService.updateVisaFromUser(userId, visaId, visaData);
-        return res.json({data: visa});
-    } catch(err) {
-        return res.status(400).json({message: err});
+        return res.json({ data: visa });
+    } catch (err) {
+        return res.status(400).json({ message: err });
     }
 }
 export async function updateVisaStatus(req: AuthRequest, res: Response) {
@@ -57,9 +59,9 @@ export async function updateVisaStatus(req: AuthRequest, res: Response) {
     let visaId = req.params.visaId;
     try {
         const visa = await visaService.updateVisaStatus(visaId, status);
-        return res.json({data: visa})
-    } catch(err) {
-        return res.status(500).json({message:err});
+        return res.json({ data: visa })
+    } catch (err) {
+        return res.status(500).json({ message: err });
     }
 }
 
@@ -68,26 +70,26 @@ export async function deleteVisa(req: AuthRequest, res: Response) {
     const userId = req.user.id;
     try {
         await visaService.deleteVisa(userId, visaId);
-        return res.json({message: "Visa Application have been deleted successfully"})
+        return res.json({ message: "Visa Application have been deleted successfully" })
     } catch (err) {
-        return res.status(500).json({message: err});
+        return res.status(500).json({ message: err });
     }
 }
 
 export async function getVisa(req: AuthRequest, res: Response) {
     try {
         const visa = await visaService.getVisaApplicationsfromUser(req.user.id);
-        return res.json({data: visa});
+        return res.json({ data: visa });
     } catch (err) {
-        return res.status(500).json({message: err});
+        return res.status(500).json({ message: err });
     }
 }
 
 export async function getSingleVisa(req: AuthRequest, res: Response) {
     try {
         const visa = await visaService.getSingleVisaApplicationsfromUser(req.user.id, req.params.visaId);
-        return res.json({data: visa});
-    } catch(err) {
-        return res.status(500).json({message: err})
+        return res.json({ data: visa });
+    } catch (err) {
+        return res.status(500).json({ message: err })
     }
 }

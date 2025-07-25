@@ -14,25 +14,6 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* RoamGO Travels is a UK-based, registered travel agency offering both local and international travel services. Our team specializes in creating personalized travel experiences, including booking flights, hotels, activities, and airport transfers.
-
-We also offer: 
-
-group tours, where one of our team members will accompany you as a tour guide to ensure
-
-a seamless and enjoyable experience
-
-
-
-RoamGo is all about encouraging everyone to adventure more by breaking barriers and making travel exciting and accessible with our bucket list experiences!
-
-
-
-To me travel is an essential pillar to living a life filled with purpose and meaning. It enables you to venture beyond your small pocket of the world and find beauty in the unknown. We help travelers each year plan stress-free getaways, from our group travel meet-ups to our private experiences!
-
-
-
-Whether you are a seasoned traveler or you finally mustered up the courage to take that first step, the experiences and travel packages we curate are all about building lasting friendships beyond your existing circle of friends, opening up to new cultures and supporting the local communities in the destinations we visit. */}
       {/* Our Story Section */}
       <section className="story-section">
         <div className="container">

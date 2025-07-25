@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authenticateJWT, AuthRequest, requireRole } from '../middlewares/authMiddleware';
 import { signupSchema, loginSchema, updateProfileSchema, changePasswordSchema } from '../models/user';
-import { validate } from '../middlewares/validate';
+import { upload, validate } from '../middlewares/validate';
 import { MessageSchema } from '../models/message';
 import { sensitiveLimiter } from '../middlewares/rateLimit';
 import authController from '../controllers/authController';
@@ -83,7 +83,7 @@ router.patch("/contact/update", authenticateJWT, requireRole("admin"), messageCo
 
 // @ts-ignore
 // Visa Application Section
-router.post("/visa/create", authenticateJWT, visaController.createVisa);
+router.post("/visa/create", authenticateJWT, upload.single("passport"), visaController.createVisa);
 router.get("/visa/admin", authenticateJWT, requireRole("admin"), visaController.getAllVisasAdmin);
 // @ts-ignore
 router.patch("/visa/update/:visaId", authenticateJWT, visaController.updateVisa);

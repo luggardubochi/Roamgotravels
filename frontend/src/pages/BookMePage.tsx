@@ -230,10 +230,15 @@ const BookMePage: React.FC = () => {
                 },
                 body: JSON.stringify(data),
             });
-            console.log(await res.json());
+            let resdata = await res.json();
             if (!res.ok) throw new Error('Failed to save booking');
             alert('Booking confirmed! trying ');
-            setTimeout(() => navigate('/'), 1200);
+            if (flightVisa.includes('Arrange visa application (if needed)')) {
+                navigate('/getvisa/' + resdata.data.id);
+            } else {
+                setTimeout(() => navigate('/profile'), 200);
+            }
+
         } catch (err) {
             console.log(err);
         }

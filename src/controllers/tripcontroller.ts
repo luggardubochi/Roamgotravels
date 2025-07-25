@@ -16,7 +16,7 @@ export const addTrip = async (req: AuthRequest, res: Response) => {
     let user_id = req.user.id;
     const result = await tripservice.addTrips(user_id, req.body)
     if (result) {
-        return res.status(201).json({ message: "Successfully added new trips into the database" });
+        return res.status(201).json({ message: "Successfully added new trips into the database", data: result.data });
     }
     return res.status(404).json({ error: "Unable to add trips into the database" });
 }

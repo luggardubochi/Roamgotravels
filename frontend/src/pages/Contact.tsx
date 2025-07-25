@@ -15,14 +15,6 @@ const Contact: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  //   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-  //     const { name, value } = e.target;
-  //     setFormData(prev => ({
-  //       ...prev,
-  //       [name]: value
-  //     }));
-  //   };
-
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

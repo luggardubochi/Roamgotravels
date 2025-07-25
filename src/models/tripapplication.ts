@@ -123,8 +123,8 @@ export class TripApplicationdb {
     @PrimaryGeneratedColumn("uuid")
     id!: string;
 
-    @OneToOne(() => User)
-    @JoinColumn()
+    @ManyToOne(() => User)
+    @JoinColumn({ name: "tripuserid", referencedColumnName: "user_id" })
     user!: User;
 
     @OneToOne(() => TripPersonalInfo, { cascade: true, onDelete: "CASCADE" })

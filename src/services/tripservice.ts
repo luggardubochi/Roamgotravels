@@ -66,7 +66,6 @@ interface TripInterface {
 
 
 export async function addTrips(user_id: string, data: TripInterface) {
-    console.log(data);
     const user = await userRepo.findOneBy({ user_id }) as DeepPartial<User>;
     if (user) {
         const trip = tripRepo().create({
@@ -81,8 +80,7 @@ export async function addTrips(user_id: string, data: TripInterface) {
         }
 
         await tripRepo().save(trip);
-
-        return true;
+        return {state: true, data: trip};
     }
     return false;
 }
