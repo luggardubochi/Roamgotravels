@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
 import path from 'path';
 // @ts-ignore
-import cloudinary from '../config/cloudinary';
+import { cloudinary } from '../config/cloudinary';
 // @ts-ignore
 import multer from 'multer';
 // @ts-ignore
