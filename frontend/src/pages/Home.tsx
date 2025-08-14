@@ -1,8 +1,8 @@
 import Carousel from '../components/Carousel';
 import Card from '../components/Card';
-import ImageVacation1 from './../assets/cards/IMG-20250620-WA0046.jpg';
+import ImageVacation1 from './../assets/IMG-20250715-WA0102.jpg';
 import ImageVacation2 from './../assets/cards/IMG-20250620-WA0050.jpg';
-import ImageVacation3 from './../assets/cards/IMG-20250620-WA0054.jpg';
+import ImageVacation3 from './../assets/IMG-20250715-WA0098.jpg';
 
 const vacationPackages = [
   {
@@ -100,11 +100,12 @@ const Home = () => (
             }}
           >
             <div style={{ fontSize: '3rem', marginBottom: 18, lineHeight: 1 }}>{step.emoji}</div>
-            <div style={{ fontWeight: 800, fontSize: '1.35rem', marginBottom: 12, color: '#1a237e',  letterSpacing: '0.5px', lineHeight: 1.2,
-        // textShadow: '0 2px 8px rgba(0,0,0,0.08)',
-        fontFamily: "PP Eiko Medium",
-        fontStyle: "italic",
-             }}>
+            <div style={{
+              fontWeight: 800, fontSize: '1.35rem', marginBottom: 12, color: '#1a237e', letterSpacing: '0.5px', lineHeight: 1.2,
+              // textShadow: '0 2px 8px rgba(0,0,0,0.08)',
+              fontFamily: "PP Eiko Medium",
+              fontStyle: "italic",
+            }}>
               {step.title}
             </div>
             <div style={{

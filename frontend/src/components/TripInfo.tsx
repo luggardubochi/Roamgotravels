@@ -3,6 +3,7 @@
 import GroupImage3 from "./../assets/thailandnwbeachsplash.jpg";
 import GroupImage4 from "./../assets/65c27d6543bb77284ba42029.jpeg";
 import GroupImage5 from "./../assets/IMG-20250620-WA0057.jpg";
+import GroupImage1 from './../assets/IMG-20250715-WA0102.jpg';
 import GroupImage6 from "./../assets/jyoshankar_travelblogger_desertluxurycamp_morocco_merzouga_saharadesert_glamping_ergchebbi_2.jpg";
 
 
@@ -103,20 +104,40 @@ export const GroupTripInfo = [
         enddate: "",
     },
     {
-        id: "e03acafb-81da-4915-8e0e-d2b9921d4c04",
+        id: "582d6fee-7a41-4295-83eb-203433496ba8",
         reverse: true,
+        imagesrc: GroupImage1,
+        title: 'Greece Group Tour ✈️✈️✈️🌍 10-13th October, 2025',
+        description: "",
+        bulletpoints: [
+            "Return Flight tickets",
+            "Airport Transfer",
+            "Hotel",
+            "Daily breakfast and drinks",
+            "Boat Cruse",
+            "Flying Dress Photoshoot at Oia"
+        ],
+        price: "€940 per person",
+        duration: "4 days",
+        startdate: '',
+        enddate: ''
+    },
+    {
+        id: "e03acafb-81da-4915-8e0e-d2b9921d4c04",
+        reverse: false,
         imagesrc: GroupImage6,
-        title: "Albania Tour 11th - 14th of July",
+        title: "Morocco 🇲🇦 Group Tour 20th - 27th of October",
         description: "Enjoy beautiful beaches, explore old towns, and discover rugged landscapes. affordable getaway with genuine hospitality and diverse appeal.",
         bulletpoints: [
+            "E-visa",
             "Return flight tickets",
             "Airport transfer",
-            "3 nights stay at a 4 star hotel",
+            "3 nights stay at a private villa",
             "Daily breakfast",
-            "Boat cruise",
-            "Paint and sip by the beach"
+            "Quad Biking",
+            "Camel ride and dinner in the desert"
         ],
-        price: "€600 per person",
+        price: "€630 (Room Share)/€730 (No room share)",
         duration: "4 Days",
         startdate: "",
         enddate: "",

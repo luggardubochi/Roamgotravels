@@ -2,9 +2,9 @@ import React from 'react';
 import Card from '../components/Card';
 import TripCard from '../components/TripCard';
 import { GroupTripInfo } from '../components/TripInfo';
-import GroupImage1 from './../assets/cards/IMG-20250620-WA0046.jpg';
+import GroupImage1 from './../assets/IMG-20250715-WA0102.jpg';
 import GroupImage2 from './../assets/cards/IMG-20250620-WA0050.jpg';
-import GroupImage3 from './../assets/cards/IMG-20250620-WA0054.jpg';
+import GroupImage3 from './../assets/IMG-20250715-WA0098.jpg';
 
 const trips = [
   {
