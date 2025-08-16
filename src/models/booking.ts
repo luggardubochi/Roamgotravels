@@ -46,10 +46,10 @@ export class Booking {
   @Column('decimal', { precision: 10, scale: 2 })
   price!: number;
 
-  @Column({ type: 'date'})//, default: ()=> "CURRENT_TIMESTAMP" })
+  @Column({ type: 'date' })//, default: ()=> "CURRENT_TIMESTAMP" })
   startDate!: string;
 
-  @Column({ type: 'date'})//,default: ()=> "CURRENT_TIMESTAMP",})
+  @Column({ type: 'date' })//,default: ()=> "CURRENT_TIMESTAMP",})
   endDate!: string;
 
   @Column({
@@ -61,7 +61,7 @@ export class Booking {
 
   @ManyToMany(() => User)
   @JoinTable({ name: 'booking_users' })
-  users!: User[] | null;
+  users!: User[];
 
   @OneToMany(() => BookingBulletPoint, bullet => bullet.booking, { cascade: true })
   bulletPoints!: BookingBulletPoint[];

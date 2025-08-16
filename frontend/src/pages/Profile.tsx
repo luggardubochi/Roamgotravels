@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Profile.css';
 import { BACKEND_API } from '../components/config';
+import TravelBookingList, { type TravelBooking } from '../components/TravelBookingList';
 
 const Profile = () => {
   const [user, setUser] = useState<any>(null);
@@ -11,6 +12,7 @@ const Profile = () => {
   const [message, setMessage] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
   const navigate = useNavigate();
+  const [booking, setBooking] = useState<TravelBooking[]>([]);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -37,7 +39,31 @@ const Profile = () => {
         setError('Unauthorized. Please log in again.');
       }
     };
+
+    const fetchBooking = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('No token found. Please log in');
+        return;
+      }
+
+      const res = await fetch(`${BACKEND_API}/api/trip/user`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': "application/json",
+        }
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        setBooking(data)
+      }
+    }
+
     fetchProfile();
+    fetchBooking();
   }, []);
 
   // @ts-ignore
@@ -251,14 +277,19 @@ const Profile = () => {
           {/* Bookings Tab */}
           {activeTab === 'bookings' && (
             <div className="tab-content">
-              <div className="bookings-section">
-                <h2>My Travel Bookings</h2>
-                <div className="bookings-empty">
-                  <div className="empty-icon">✈️</div>
-                  <h3>No bookings yet</h3>
-                  <p>Start your adventure by exploring our amazing destinations!</p>
-                  <button onClick={() => navigate('/trip')} className="btn-primary" style={{ paddingInline: "20px" }}>Browse Trips</button>
-                </div>
+              <div className="bookings-section" style={{ overflowY: "scroll" }}>
+                {booking.length > 0 ? (
+                  <TravelBookingList bookings={booking} />
+                ) : (
+
+                  <><h2>My Travel Bookings</h2><div className="bookings-empty">
+                    <div className="empty-icon">✈️</div>
+                    <h3>No bookings yet</h3>
+                    <p>Start your adventure by exploring our amazing destinations!</p>
+                    <button onClick={() => navigate('/trip')} className="btn-primary" style={{ paddingInline: "20px" }}>Browse Trips</button>
+                  </div></>
+                )
+                }
               </div>
             </div>
           )}

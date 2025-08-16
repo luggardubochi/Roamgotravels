@@ -69,6 +69,8 @@ router.get('/bookings/bullet/:id', authenticateJWT, requireRole('admin'), bookin
 // @ts-ignore
 router.get("/trip/all", authenticateJWT, requireRole('admin'), tripController.getTrips);
 // @ts-ignore
+router.get("/trip/user", authenticateJWT, tripController.getTripUser);
+// @ts-ignore
 router.post("/trip/add", authenticateJWT, tripController.addTrip);
 // @ts-ignore
 router.patch("/trip/update", authenticateJWT, requireRole('admin'), tripController.updateTripStatus);

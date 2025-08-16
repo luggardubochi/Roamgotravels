@@ -76,8 +76,9 @@ export const changePassword = async (req: AuthRequest, res: Response) => {
 
 export async function getCurrentuser(req: AuthRequest, res: Response) {
   const userRepo = AppDataSource.getRepository(User);
-  const user_id = req.user.id;
+  const user_id = req.user.user_id;
   const user = await userRepo.findOne({ where: { user_id } })
+  console.log(user, user_id);
   if (user)
     return res.status(200).json({ user })
   else

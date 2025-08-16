@@ -6,7 +6,7 @@ export const getTrips = async (req: Request, res: Response) => {
     const result = await tripservice.getAllTrips();
     if (result.length >= 1) { return res.status(200).json({ data: result }) }
     else if (result.length == 0) {
-        return res.status(200).json({ message: "No trips have been upload ed to the database", data: [] })
+        return res.status(200).json({ message: "No trips have been uploaded to the database", data: [] })
     } else {
         return res.status(404).json({ error: "Unable to geturn all users" });
     }
@@ -29,4 +29,14 @@ export const updateTripStatus = async (req: Request, res: Response) => {
         return res.status(201).json({ message: `Updated the trip status to ${status}` });
     }
     return res.status(404).json({ error: "unable to update status of trip" });
+}
+
+export const getTripUser = async (req: AuthRequest, res: Response) => {
+    const user = req.user;
+    const result = await tripservice.getTripUser(user);
+    if (result) {
+        return res.status(200).json(result);
+    }
+    return res.status(404).json({ error: "unable to retrieve trips" });
+
 }

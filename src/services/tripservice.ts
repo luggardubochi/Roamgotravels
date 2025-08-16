@@ -12,6 +12,21 @@ const location = () => AppDataSource.getRepository(LocationPref);
 const contact = () => AppDataSource.getRepository(EmergencyContact);
 const compan = () => AppDataSource.getRepository(Companion);
 
+interface UserProps {
+    user_id: string,
+    email: string,
+    username: string,
+    password: string,
+    first_name: string,
+    last_name: string,
+    phone_number: string,
+    created_at: Date,
+    updated_at: Date,
+    is_active: Boolean,
+    last_login: Date,
+    role: string,
+}
+
 interface UserInterface {
     fullname: string,
     email: string,
@@ -80,7 +95,7 @@ export async function addTrips(user_id: string, data: TripInterface) {
         }
 
         await tripRepo().save(trip);
-        return {state: true, data: trip};
+        return { state: true, data: trip };
     }
     return false;
 }
@@ -117,4 +132,12 @@ export async function editsingletripstatus(id: string, status: string) {
         return true;
     return false;
 
+}
+
+export async function getTripUser(userg: UserProps) {
+    const user = await userRepo.findOneBy({ user_id: userg.user_id });
+    if (!user) throw new Error("User Not found")
+    const trip = await tripRepo().findBy({ user: user });
+    if (!trip) throw new Error("Trip not found");
+    return trip;
 }
