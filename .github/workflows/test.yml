@@ -1,0 +1,29 @@
+name: Test Roamgo
+
+on:
+    push:
+        branches:
+            - main
+
+env: 
+    BACKEND_API: http://localhost:5000
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Build Backend
+              run: npm install && npm run build
+              
+            - name: Build Frontend
+              run: |
+                cd frontend
+                npm install
+                echo "BACKEND_API=${{env.BACKEND_API}}" > .env
+                npm run build
+
+
