@@ -96,7 +96,7 @@ const AdminPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<'user'|'trip'|'visa'|'contact'|null>(null);
+  const [modalType, setModalType] = useState<'user' | 'trip' | 'visa' | 'contact' | null>(null);
   const [modalData, setModalData] = useState<any>(null);
   console.log(contactSubmissions);
   // Mock data for visa applications and contact submissions
@@ -178,7 +178,7 @@ const AdminPage: React.FC = () => {
         });
 
         if (tripsRes.ok) {
-        const tripsData = await tripsRes.json();
+          const tripsData = await tripsRes.json();
           console.log(tripsData.data);
           setTripApplications(tripsData.data);
         }
@@ -333,6 +333,7 @@ const AdminPage: React.FC = () => {
     fontWeight: 600,
     borderBottom: '3px solid transparent',
     transition: 'all 0.3s ease',
+    color: 'black',
   };
 
   const activeTabStyle = {
@@ -403,7 +404,7 @@ const AdminPage: React.FC = () => {
   );
 
   return (
-    <div style={{ fontFamily: "'Roboto', 'Open Sans', Arial, sans-serif" }}>
+    <div style={{ fontFamily: "'Roboto', 'Open Sans', Arial, sans-serif", height: "100vh", overflowY: 'scroll', marginBottom: '5vh', paddingBottom: '3vh'}}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <h1 style={{
           fontSize: '2.5rem',
@@ -630,7 +631,7 @@ const AdminPage: React.FC = () => {
                   <tr>
                     <th style={thStyle}>Name</th>
                     <th style={thStyle}>Email</th>
-                    <th style={thStyle}>Subject</th> 
+                    <th style={thStyle}>Subject</th>
                     <th style={thStyle}>Message</th>
                     <th style={thStyle}>Status</th>
                     <th style={thStyle}>Submitted</th>

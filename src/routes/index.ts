@@ -33,7 +33,7 @@ router.post('/login', sensitiveLimiter, validate(loginSchema), authController.lo
 
 // @ts-ignore
 router.get('/profile', authenticateJWT, userController.getCurrentuser);
-
+router.get('/isadmin', authenticateJWT, authController.checkingAdmin);
 router.get('/admin', authenticateJWT, requireRole('admin'), (req: AuthRequest, res) => {
   res.json({ message: 'Welcome, admin user!', user: req.user });
 });

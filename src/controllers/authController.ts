@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as authService from '../services/authService';
+import { AuthRequest } from '../middlewares/authMiddleware';
 
 export const signup = async (req: Request, res: Response) => {
   const { email, username, password, first_name, last_name, phone_number } = req.body;
@@ -18,4 +19,12 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export default { signup, login }; 
+export const checkingAdmin = async (req: AuthRequest, res: Response) => {
+  if (req.user.role === "admin") {
+    res.status(200).json({ isAdmin: true });
+  } else {
+    res.status(200).json({ isAdmin: false });
+  }
+}
+
+export default { signup, login, checkingAdmin };
