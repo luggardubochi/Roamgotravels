@@ -23,7 +23,7 @@ export function FeatureCard({ icon, title, description, action }: FeatureCardPro
       <div className="bg-white shadow-md p-6 rounded-2xl border border-gray-200 hover:border-pink-400 hover:shadow-lg hover:shadow-pink-100">
         <div className="flex flex-col items-center text-center">
           <div className="mb-3">{icon}</div>
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h3 className="text-lg text-black font-semibold">{title}</h3>
           <p className="text-gray-600 text-sm mt-2">{description}</p>
           {action && (
             <button
