@@ -11,6 +11,7 @@ import * as userBooking from '../controllers/userBookingController';
 import * as tripController from '../controllers/tripcontroller';
 import * as messageController from '../controllers/messagecontroller';
 import * as visaController from '../controllers/visaController';
+import * as payController from '../controllers/paymentController';
 
 const router = Router();
 
@@ -98,6 +99,10 @@ router.get("/visa/user", authenticateJWT, visaController.getVisa);
 // @ts-ignore
 router.get("/visa/user/:visaId", authenticateJWT, visaController.getSingleVisa);
 
+// Payments
+router.post("/payment-intent", authenticateJWT, payController.createPaymentIntent);
+// @ts-ignore
+router.post("/confirm-Transaction", payController.confimTransaction);
 
 
 
