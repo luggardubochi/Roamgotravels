@@ -1,5 +1,8 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,react,nextjs
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,react,nextjs
+node_modules
+# Keep environment variables out of version control
+.env
+
+/app/generated/prisma
 
 ### NextJS ###
 # dependencies
@@ -189,5 +192,3 @@ node_modules
 psd
 thumb
 sketch
-
-# End of https://www.toptal.com/developers/gitignore/api/node,react,nextjs
