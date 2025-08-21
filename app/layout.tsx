@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+
+const popping = Poppins({
+  weight: "600",
+  style: "normal",
+  subsets: ["latin"],
+  variable: "--popping",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,11 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${popping.variable} antialiased`}
       >
+        <main className="bg-zinc-100">
         <NavBar />
         {children}
         <Footer />
+        </main>
       </body>
     </html>
   );
