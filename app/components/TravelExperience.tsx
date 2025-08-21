@@ -9,7 +9,7 @@ export default function TravelExperience() {
   return (
     <section className="py-16 px-6 md:px-20 text-center">
       <motion.h2
-        className="text-3xl md:text-4xl font-bold mb-4"
+        className="text-3xl md:text-4xl font-bold mb-4 text-pink-600"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -53,9 +53,9 @@ export default function TravelExperience() {
           viewport={{ once: true }}
           className="flex justify-center"
         >
-          <div className="rounded-full border-2 border-dashed border-gray-300 p-2">
+          <div className="rounded-full border-2 border-dashed border-gray-900 p-2">
             <Image
-              src="/travel-swing.jpg" // put in /public
+              src="/assets/IMG-20250715-WA0102.jpg" 
               alt="Travel swing"
               width={400}
               height={400}
