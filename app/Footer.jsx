@@ -20,7 +20,7 @@ const Footer = () => {
         {/* MIDDLE: LINKS */}
         <div className="flex flex-col space-y-2">
           <h3 className="text-lg font-semibold text-white">Quick Links</h3>
-          <Link href="/" className="hover:text-white">Group Trips</Link>
+          <Link href="grouptrip" className="hover:text-white">Group Trips</Link>
           <Link href="/" className="hover:text-white">Private Trips</Link>
           <Link href="/" className="hover:text-white">Past Trips</Link>
           <Link href="/" className="hover:text-white">About Us</Link>
