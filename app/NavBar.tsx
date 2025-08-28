@@ -67,7 +67,7 @@ const NavBar = () => {
                 </div>
 
                 {/* DESKTOP LEFT LINKS */}
-                <ul className="hidden lg:flex space-x-8 text-white ml-2">
+                <ul className="hidden lg:flex space-x-8 text-black ml-2">
                     <li>
                         <Link href="" className={linksConf}>
                             Group Trips
