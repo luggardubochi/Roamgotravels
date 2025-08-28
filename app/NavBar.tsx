@@ -8,7 +8,7 @@ import { FiSearch } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-import Logo from "../public/roamtravel_logo.png";
+import Logo from "@/public/vercel.svg";
 
 const NavBar = () => {
     const linksConf = "text-lg font-medium hover:text-gray-300 transition-colors";
