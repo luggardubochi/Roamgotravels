@@ -1,205 +1,176 @@
-# Roamgo Travels
+# RoamGo Travels: Explore the World Your Way ✈️
 
-<center><img src="frontend/src/assets/roamtravel_logo.png" alt="Roamgo Portfolio"></center>
-
-A full-stack travel booking platform built with React (Vite) frontend and NestJS/Express backend. This application provides a complete travel agency experience with user authentication, trip management, booking system, and admin functionality.
+## Overview
+RoamGo Travels is a modern full-stack travel platform built with Next.js, designed to connect adventurers with unique group and private trip experiences. It features a robust authentication system, dynamic trip browsing with advanced filtering, and a responsive user interface, all powered by a MySQL database managed with Prisma ORM.
 
 ## Features
+-   **User Authentication**: Secure user registration, login, and session management using JWT.
+-   **Protected Routes**: Role-based access control for user dashboards and administrative panels via Next.js middleware.
+-   **Group & Private Trip Discovery**: Browse a diverse catalog of pre-planned group and customizable private travel experiences.
+-   **Advanced Trip Filtering**: Dynamically filter trips by continent, year, month, trip style, and a customizable price range.
+-   **Responsive User Interface**: Enjoy a seamless experience across all devices with a modern design crafted using Tailwind CSS, Radix UI, and Framer Motion.
+-   **Detailed Trip Information**: View comprehensive details for individual group trips, including overview, itinerary, perks, and costs.
+-   **Efficient Data Management**: Backend operations are handled efficiently with Next.js API routes and Prisma ORM for database interactions.
 
-- **User Authentication**: Signup, login, and role-based access control
-- **Trip Management**: Browse, create, and manage travel packages
-- **Booking System**: Users can book trips with flexible options
-- **Admin Dashboard**: Manage users, trips, and bookings
-- **Responsive Design**: Modern UI that works on all devices
-- **Image Upload**: Cloudinary integration for trip images
-- **Database**: SQLite/MySQL support with TypeORM
+## Getting Started
 
-## Tech Stack
+### Installation
+To set up RoamGo Travels locally, follow these steps:
 
-### Frontend
-- React 19 with TypeScript
-- Vite for build tooling
-- React Router for navigation
-- Modern CSS with responsive design
+1.  **Clone the Repository**:
+    ```bash
+    git clone git@github.com:luggardubochi/Roamgotravels.git
+    ```
+2.  **Navigate to Project Directory**:
+    ```bash
+    cd Roamgotravels
+    ```
+3.  **Install Dependencies**:
+    ```bash
+    npm install
+    # or yarn install
+    ```
+4.  **Generate Prisma Client**:
+    ```bash
+    npx prisma generate
+    ```
+5.  **Run Database Migrations**: Ensure your MySQL database is configured and accessible via `DATABASE_URL` in your `.env` file.
+    ```bash
+    npx prisma migrate dev --name init
+    ```
 
-### Backend
-- Express.js with TypeScript
-- TypeORM for database management
-- JWT for authentication
-- Joi for validation
-- Multer for file uploads
-- Cloudinary for image storage
+### Environment Variables
+Create a `.env` file in the root of the project and populate it with the following variables:
 
-### Database
-- SQLite (development)
-- MySQL (production)
+-   `DATABASE_URL`: Connection string for your MySQL database.
+    -   Example: `DATABASE_URL="mysql://user:password@localhost:3306/roamgotravels_db"`
+-   `TOKEN_NAME`: The name of the HTTP-only cookie used to store the JWT.
+    -   Example: `TOKEN_NAME="roamgo_auth_token"`
+-   `JWT_SECRET`: A strong secret key used to sign and verify JWTs.
+    -   Example: `JWT_SECRET="super_secret_jwt_key_that_is_very_long_and_complex"`
 
-## Prerequisites
+## API Documentation
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Git
+### Base URL
+The base URL for authentication-related API endpoints is `/api/auth`.
 
-## Environment Variables
+### Endpoints
 
-### Backend (.env in root directory)
-```env
-# Database
-DB_TYPE=sqlite # For development `mysql` for production
-DB_HOST=localhost
-DB_PORT=3306
-DB_USERNAME=root
-DB_PASSWORD=your_password
-DB_DATABASE=roamgotravels
-
-# These are the configurations for containerization
-MYSQL_PORT=3306
-MYSQL_USER=roamgotravels
-MYSQL_PASSWORD=your_own_password
-MYSQL_DATABASE=roamgotravels
-MYSQL_ROOT_PASSWORD=rootpassword
-
-
-# Cloudinary (for image uploads)
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-# Server
-PORT=5000
+#### `POST /api/auth/signup`
+Handles user registration.
+**Request**:
+```json
+{
+  "name": "string",
+  "email": "string (email format)",
+  "password": "string"
+}
 ```
 
-### Frontend (.env in frontend directory)
-```env
-# Backend API URL
-VITE_BACKEND_API_URL=http://localhost:5000/api
-# For production, Use the actual url for the backend 
+**Response**:
+```json
+{
+  "message": "User created",
+  "user": {
+    "id": "string (UUID)",
+    "email": "string (email format)"
+  }
+}
 ```
 
-## Installation
+**Errors**:
+-   `400 Bad Request`: Missing fields (`name`, `email`, or `password`).
+-   `409 Conflict`: User with the provided email already exists.
+-   `500 Internal Server Error`: An unexpected server-side error occurred during signup.
 
-1. **Clone the repository**
-   ```bash
-   git clone git@github.com:luggardubochi/Roamgotravels.git
-   cd roamgotravels
-   ```
+#### `POST /api/auth/login`
+Handles user login and issues an authentication token.
+**Request**:
+```json
+{
+  "email": "string (email format)",
+  "password": "string"
+}
+```
 
-2. **Install backend dependencies**
-   ```bash
-   npm install
-   ```
+**Response**:
+```json
+{
+  "message": "Login successful"
+}
+```
+*A successful login sets an HTTP-only cookie named by `TOKEN_NAME` containing the JWT.*
 
-3. **Install frontend dependencies**
-   ```bash
-   cd frontend
-   npm install
-   cd ..
-   ```
+**Errors**:
+-   `401 Unauthorized`: Invalid email or password credentials.
+-   `500 Internal Server Error`: An unexpected server-side error occurred during login.
 
-## Running the Application
+#### `POST /api/auth/logout`
+Handles user logout by clearing the authentication token cookie.
+**Request**:
+*This endpoint does not require a request body.*
 
-### Option 1: Run Frontend Only
+**Response**:
+```json
+{
+  "message": "Logout successful"
+}
+```
+*This action typically clears the `TOKEN_NAME` HTTP-only cookie, effectively logging out the user.*
+
+**Errors**:
+-   `500 Internal Server Error`: An unexpected error occurred while attempting to clear the session cookie.
+
+## Usage
+To run the application in development mode:
+
 ```bash
-npm run start:frontend
-```
-The frontend will be available at `http://localhost:5173`
-
-### Option 2: Run Backend Only
-```bash
-npm run start:backend
-```
-The backend API will be available at `http://localhost:5000`
-
-The API documentation will be available at `http://localhost:5000/api-docs`
-
-### Option 3: Run Both Together
-```bash
-npm start
-```
-This will start both frontend and backend simultaneously:
-- Frontend: `http://localhost:5173`
-- Backend: `http://localhost:5000`
-
-## Development Scripts
-
-### Backend Scripts
-```bash
-npm run start:backend    # Start backend server
-npm run dev:backend      # Start backend with nodemon (if available)
+npm run dev
+# or yarn dev
 ```
 
-### Frontend Scripts
-```bash
-cd frontend
-npm run dev              # Start development server
-npm run build            # Build for production
-npm run preview          # Preview production build
-```
+The application will be accessible at `http://localhost:3000`.
 
-### Containerization Scripts
-```bash
-# Ensure that the env file is filled with details for the application development.
-# Also ensure that docker is installed in the computer.
+-   **Browse Trips**: Navigate to `/grouptrip` to explore available group travel options.
+-   **Apply Filters**: Use the filter bar at the top of the group trips page to refine your search by various criteria.
+-   **Authentication**:
+    -   Sign up for a new account at `/auth/signup`.
+    -   Log in to an existing account at `/auth/login`.
+    -   Access the user dashboard at `/dashboard` after logging in.
+    -   (Future: Access the admin panel at `/admin` for users with `admin` role).
 
+## Technologies Used
 
-# For linux users
-sudo docker compose build  # To build to docker container and image
-sudo docker compose up 	   # To run the docker container
-
-# For windows users, remove the sudo and run the application
-# Sudo implies running the application as root.
-```
-
-## Database Setup
-
-The application uses SQLite by default for development. The database file will be created automatically when you first run the application.
-
-For MySQL production setup:
-1. Create a MySQL database
-2. Update the environment variables with your MySQL credentials
-3. Set `DB_TYPE=mysql` in your .env file
-
-## Deployment
-
-### Frontend (Netlify)
-1. Build the frontend: `cd frontend && npm run build`
-2. Deploy to Netlify using the provided `netlify.toml` configuration
-3. Set environment variables in Netlify dashboard
-
-### Backend (Render/Railway/Heroku)
-1. Deploy to your preferred Node.js hosting platform
-2. Set environment variables in the platform dashboard
-3. Configure database connection
-
-## Testing
-
-Run the test suite:
-```bash
-npx jest
-```
-**Note**: The test is still being worked on
-
-## Project Structure
-
-```
-roamgotravels/
-├── src/                    # Backend source code
-│   ├── controllers/        # API controllers
-│   ├── models/            # Database models
-│   ├── services/          # Business logic
-│   ├── middlewares/       # Express middlewares
-│   ├── routes/            # API routes
-│   └── config/            # Configuration files
-├── frontend/              # React frontend
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── pages/         # Page components
-│   │   └── assets/        # Static assets
-│   └── public/            # Public assets
-├── tests/                 # Test files
-└── database.sqlite        # SQLite database file
-```
+| Category   | Technology   | Version      | Description                                | Link                                          |
+| :--------- | :----------- | :----------- | :----------------------------------------- | :-------------------------------------------- |
+| **Frontend** | Next.js      | 15.5.0       | React framework for full-stack applications | [nextjs.org](https://nextjs.org/)             |
+|            | React        | 19.1.0       | JavaScript library for building user interfaces | [react.dev](https://react.dev/)               |
+|            | TypeScript   | 5            | Typed superset of JavaScript               | [typescriptlang.org](https://www.typescriptlang.org/) |
+|            | Tailwind CSS | 4.1.12       | Utility-first CSS framework                | [tailwindcss.com](https://tailwindcss.com/)   |
+|            | Framer Motion | 12.23.12     | Production-ready motion library for React  | [framer.com/motion](https://www.framer.com/motion/) |
+|            | Radix UI     | 3.2.1        | Unstyled UI components for React           | [radix-ui.com](https://www.radix-ui.com/)     |
+| **Backend**  | Next.js API Routes | 15.5.0       | API endpoints for server-side logic        | [nextjs.org/docs/app/building-your-application/routing/route-handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) |
+|            | Prisma ORM   | 6.14.0       | Next-generation Node.js and TypeScript ORM | [prisma.io](https://www.prisma.io/)           |
+|            | MySQL        | (External)   | Relational database system                 | [mysql.com](https://www.mysql.com/)           |
+|            | bcryptjs     | 3.0.2        | Password hashing library                   | [npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs) |
+|            | jsonwebtoken | 9.0.2        | JSON Web Token implementation for Node.js  | [npmjs.com/package/jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) |
+| **Tooling**  | ESLint       | 9            | Pluggable JavaScript linter                | [eslint.org](https://eslint.org/)             |
+|            | Node.js      | 20.x         | JavaScript runtime environment             | [nodejs.org](https://nodejs.org/en)           |
 
 ## License
+Distributed under the MIT License.
 
-This project is proprietary and not open for contributions.
+## Author Info
+-   **Your Name**: [Your LinkedIn Profile] | [Your Twitter Handle] | [Your Portfolio Link]
+
+---
+
+![Next.js](https://img.shields.io/badge/Next.js-Black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=prisma&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+
+[![Readme was generated by Dokugen](https://img.shields.io/badge/Readme%20was%20generated%20by-Dokugen-brightgreen)](https://www.npmjs.com/package/dokugen)
