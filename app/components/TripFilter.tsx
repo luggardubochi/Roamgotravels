@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BiX } from "react-icons/bi";
-import { DualRange } from "./DualRange"; // adjust import path
+import { DualRange } from "./DualRange";
 import { CiSliderHorizontal } from "react-icons/ci";
 
 export type TripFilterProps = {
@@ -16,9 +16,37 @@ export type TripFilterProps = {
     }) => void;
 };
 
+function setupIntersectionObserver(elementId: string, callback: (...x: any) => void) {
+    const element = document.getElementById(elementId);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                callback('visible', entry);
+            } else {
+                const rect = entry.boundingClientRect;
+                if (rect.bottom < 0) {
+                    callback('scrolled-past', entry);
+                } else if (rect.top > window.innerHeight) {
+                    callback('before', entry);
+                }
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0
+    });
+
+    observer.observe(element as HTMLElement);
+    return observer;
+}
+
 const TripFilter: React.FC<TripFilterProps> = ({ onApply }) => {
     const [isSticky, setIsSticky] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [height, setHeight] = useState<number>(0);
+    const [scroll, setScroll] = useState<number>(0);
 
     const [continent, setContinent] = useState("");
     const [year, setYear] = useState("");
@@ -29,8 +57,10 @@ const TripFilter: React.FC<TripFilterProps> = ({ onApply }) => {
 
     useEffect(() => {
         const handleScroll = () => {
+
+            const trippy = document.getElementById("hightlight");
             const heroHeight = document.getElementById("hero")?.offsetHeight || 0;
-            setIsSticky(window.scrollY > heroHeight);
+            setIsSticky(window.scrollY > heroHeight && window.scrollY < (trippy?.offsetTop as number));
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
@@ -49,7 +79,7 @@ const TripFilter: React.FC<TripFilterProps> = ({ onApply }) => {
 
     /** Extracted reusable filter form */
     const FilterForm = () => (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 items-end p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 items-end p-4" id="tripfilter">
             {/* Continent */}
             <div className="flex flex-col gap-1">
                 <label className="text-sm text-gray-600">Continent</label>
@@ -144,10 +174,9 @@ const TripFilter: React.FC<TripFilterProps> = ({ onApply }) => {
         </div>
     );
 
-    // 🔑 NOW the component actually RETURNS JSX
+
     return (
         <>
-            {/* Desktop sticky bar */}
             <div
                 className={`hidden md:block w-full bg-white shadow-md transition-all duration-300 ${isSticky ? "fixed top-0 left-0 z-50" : "relative"
                     }`}

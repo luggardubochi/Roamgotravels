@@ -70,3 +70,14 @@ model Verification {
 
   @@map("verification")
 }
+
+model ContactMessage {
+  id          String   @id
+  fullname    String   @db.Text
+  email       String   @db.Text
+  phoneNumber String   @db.Text
+  subject     String   @db.Text
+  message     String   @db.Text
+  submittedAt DateTime @default(now())
+  status      String   @default("New")
+}

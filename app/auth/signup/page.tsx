@@ -1,18 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Label from "@radix-ui/react-label";
 import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+    const [user, setUser] = useState<any>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await fetch("/api/me/", { credentials: "include" });
+                if (res.ok) {
+                    const data = await res.json();
+                    setUser(data);
+                } else {
+                    setUser(null);
+                }
+            } catch (err) {
+                console.error("Error fetching user:", err);
+                setUser(null);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
     const [form, setForm] = useState({
-        name: "",
+        firstname: "",
+        lastname: "",
         email: "",
         password: "",
         confirmPassword: "",
     });
 
-    const router = useRouter();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,14 +53,14 @@ export default function SignupPage() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: form.name,
+                    firstname: form.firstname,
+                    lastname: form.lastname,
                     email: form.email,
                     password: form.password,
                 }),
             });
 
             const data = await res.json();
-            console.log(data);
 
             if (!res.ok) {
                 alert(data.error || "Signup failed");
@@ -52,6 +74,9 @@ export default function SignupPage() {
         }
     };
 
+    if (user)
+        router.push("/dashboard");
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50">
             <form
@@ -61,15 +86,30 @@ export default function SignupPage() {
                 <h1 className="text-2xl font-semibold text-center text-black">Sign Up</h1>
 
                 <div>
-                    <Label.Root htmlFor="name" className="text-sm font-medium text-black">
-                        Name
+                    <Label.Root htmlFor="firstname" className="text-sm font-medium text-black">
+                        First Name
                     </Label.Root>
                     <input
-                        id="name"
-                        name="name"
+                        id="firstname"
+                        name="firstname"
                         type="text"
                         required
-                        value={form.name}
+                        value={form.firstname}
+                        onChange={handleChange}
+                        className="w-full mt-1 px-3 py-2 border rounded-xl text-black"
+                    />
+                </div>
+
+                <div>
+                    <Label.Root htmlFor="lastname" className="text-sm font-medium text-black">
+                        Last Name
+                    </Label.Root>
+                    <input
+                        id="lastname"
+                        name="lastname"
+                        type="text"
+                        required
+                        value={form.lastname}
                         onChange={handleChange}
                         className="w-full mt-1 px-3 py-2 border rounded-xl text-black"
                     />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Label from "@radix-ui/react-label";
 import { motion } from "framer-motion";
 import { redirect, useRouter } from "next/navigation";
@@ -12,6 +12,27 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [user, setUser] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await fetch("/api/me/", { credentials: "include" });
+                if (res.ok) {
+                    const data = await res.json();
+                    setUser(data);
+                } else {
+                    setUser(null);
+                }
+            } catch (err) {
+                console.error("Error fetching user:", err);
+                setUser(null);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -27,12 +48,10 @@ export default function LoginPage() {
 
             if (!res.ok) {
                 const data = await res.json();
-                console.log(data);
                 setError(data.error || "Login failed");
                 setLoading(false);
                 return;
             }
-            console.log(await res.json())
             // return redirect("/dashboard");
             router.push("/dashboard");
             return;
@@ -44,9 +63,10 @@ export default function LoginPage() {
     };
 
 
-
+    if (user)
+        router.push("/dashboard");
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="flex items-center justify-center lg:h-[60vh]  bg-gradient-to-br from-gray-50 to-gray-100">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

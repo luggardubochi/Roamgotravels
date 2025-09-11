@@ -29,7 +29,6 @@ export function TripCard({ key, identity, image, title, date, tags }: TripCardPr
             onClick={() => {
                 if (identity)
                     router.push(`/grouptrip/${identity}`)
-                console.log(title, key, identity);
             }}
         >
             <Image
@@ -145,7 +144,7 @@ export default function GroupDestinations() {
                     {/* Cards */}
                     <div className="flex gap-6 overflow-hidden">
                         {trips.slice(currentIndex, currentIndex + 3).map((trip, i) => (
-                            <TripCard key={i} {...trip} />
+                            <TripCard key={`${i}`} {...trip} />
                         ))}
                     </div>
 

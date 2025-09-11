@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req: Request) {
     try {
-        const { name, email, password } = await req.json();
+        const { firstname, lastname, email, password } = await req.json();
 
-        if (!name || !email || !password) {
+        if (!firstname || !lastname || !email || !password) {
             return NextResponse.json({ error: "Missing fields" }, { status: 400 });
         }
 
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
         // Save user
         const data = {
-            id: uuidv4(), name: name, email: email,
+            id: uuidv4(), firstName: firstname, lastName: lastname, email: email,
             password: hashed, role: "user",
             emailVerified: false, image: null,
         };

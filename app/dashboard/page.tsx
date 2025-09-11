@@ -1,5 +1,6 @@
 import { getUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { Profile, ProfileDetails } from "./components";
 
 
 export default async function Page() {
@@ -8,10 +9,9 @@ export default async function Page() {
     if (!user) redirect("/auth/login");
 
     return (
-        <div className="flex items-center justify-center h-screen">
-            <h1 className="text-2xl font-bold">
-                Welcome, {user.email}!
-            </h1>
+        <div className="flex justify-center flex-col gap-5 lg:h-[60vh] items-start lg:flex-row lg:mx-72 lg:my-20">
+            <Profile />
+            <ProfileDetails />
         </div>
     )
 }

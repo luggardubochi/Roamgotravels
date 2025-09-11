@@ -28,7 +28,6 @@ export async function POST(req: Request) {
 
         const res = NextResponse.json({ message: "Login successful" }, { status: 200 });
         const cookiestore = await cookies();
-        console.log(cookiestore);
         cookiestore.set(TOKENNAME, token, {
             httpOnly: true,
             path: "/",

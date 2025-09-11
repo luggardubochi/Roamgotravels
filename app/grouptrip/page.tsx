@@ -51,8 +51,6 @@ const Page = () => {
             const months = value.tripTime.map(x => x.startDate.getMonth().toString());
             const tags = value.tag;
             const price = value.cost;
-            if (filter)
-                console.log(getMonthNumber(filter.month), months, new Date(2025, 12, 22).toDateString());
 
             const matchYear = filter?.year ? years.includes(filter.year) : true;
             const matchMonth = filter?.month ? months.includes(getMonthNumber(filter.month)) : true;

@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 
 export async function middleware(req: NextRequest) {
     const token = req.cookies.get(TOKENNAME)?.value;
-    console.log(token);
 
     if (req.nextUrl.pathname.startsWith("/dashboard")) {
         if (token == undefined) {
@@ -13,7 +12,6 @@ export async function middleware(req: NextRequest) {
         }
         const user = await verifyJWT(token);
         if (!user) {
-            console.log(jwt.verify(token, JWT_SECRET), token);
             return NextResponse.redirect(new URL("/auth/login", req.url));
         }
     }
