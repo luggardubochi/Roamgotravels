@@ -1,7 +1,7 @@
 "use client";
 
 import CurrencySelector from "@/app/components/CurrencySelector";
-import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
 import { MouseEventHandler, useState } from "react";
 
 export default function PrivateBookingForm() {
@@ -17,6 +17,7 @@ export default function PrivateBookingForm() {
     const [currency, setCurrency] = useState("");
     const [notes, setNotes] = useState("");
     const [terms, setTerms] = useState<boolean>(false);
+    const router = useRouter();
 
     const hotelOptions = [
         "Beachfront Resort",
@@ -245,13 +246,15 @@ export default function PrivateBookingForm() {
                 />
             </div>
 
-            <div>
+            <div className="flex">
                 {/* // @ts-ignore */}
                 <input type="checkbox" className="mr-2" onClick={e => {
                     // @ts-ignore
                     setTerms(e.target.checked);
                 }} />
-                <Link href={"terms/privatebooking"} className="underline hover:text-blue-600"> By clicking the terms and conditions</Link>
+                <p onClick={() => {
+                    router.replace("terms/privatebooking")
+                }} className="underline hover:text-blue-600"> By clicking the terms and conditions</p>
             </div>
 
             <button
