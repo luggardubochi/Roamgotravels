@@ -14,7 +14,7 @@ export default function Page({ searchParams }: { searchParams: any }) {
             amount: 200,
             currency: "usd"
         }} 
-        className
+        // className
         >
 
             <Checkout />
